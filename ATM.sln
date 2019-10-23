@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverUser", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverApplication", "TransponderReceiverApplication\TransponderReceiverApplication.csproj", "{5BF5A5A7-E181-4321-A362-D16F4849586A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TrasnponderReceiver", "TrasnponderReceiver", "{E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176} = {E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433} = {E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}
+		{5BF5A5A7-E181-4321-A362-D16F4849586A} = {E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B1DE4F1-67EE-4906-82C3-A0C646532205}
