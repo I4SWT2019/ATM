@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM", "ATM\ATM.csproj", "{039AF56C-24FF-4C21-8E12-BA1C58DEFF04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM.Test.Unit", "ATM.Test.Unit\ATM.Test.Unit.csproj", "{784E60D7-117E-4755-8440-AF6FFC4A16B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Items", "Shared Items", "{B6973A59-E322-4ED0-8C64-745B5DC6870D}"
+	ProjectSection(SolutionItems) = preProject
+		dotCoverCoverageConfig.xml = dotCoverCoverageConfig.xml
+		TransponderReceiver.dll = TransponderReceiver.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverUser.Test.Unit", "TransponderReceiverUser.Test.Unit\TransponderReceiverUser.Test.Unit.csproj", "{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverUser", "TransponderReceiverUser\TransponderReceiverUser.csproj", "{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverApplication", "TransponderReceiverApplication\TransponderReceiverApplication.csproj", "{5BF5A5A7-E181-4321-A362-D16F4849586A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TrasnponderReceiver", "TrasnponderReceiver", "{E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{039AF56C-24FF-4C21-8E12-BA1C58DEFF04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039AF56C-24FF-4C21-8E12-BA1C58DEFF04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039AF56C-24FF-4C21-8E12-BA1C58DEFF04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039AF56C-24FF-4C21-8E12-BA1C58DEFF04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{784E60D7-117E-4755-8440-AF6FFC4A16B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{784E60D7-117E-4755-8440-AF6FFC4A16B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{784E60D7-117E-4755-8440-AF6FFC4A16B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{784E60D7-117E-4755-8440-AF6FFC4A16B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF5A5A7-E181-4321-A362-D16F4849586A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF5A5A7-E181-4321-A362-D16F4849586A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF5A5A7-E181-4321-A362-D16F4849586A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF5A5A7-E181-4321-A362-D16F4849586A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176} = {E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433} = {E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}
+		{5BF5A5A7-E181-4321-A362-D16F4849586A} = {E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B1DE4F1-67EE-4906-82C3-A0C646532205}
+	EndGlobalSection
+EndGlobal
