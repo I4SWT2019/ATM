@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM.Calculators
 {
-    class headingCalculator
+    class HeadingCalculator
     {
     }
 }

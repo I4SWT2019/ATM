@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM.Interfacess
 {
-    class Iobserver
+    class IObserver
     {
     }
 }
