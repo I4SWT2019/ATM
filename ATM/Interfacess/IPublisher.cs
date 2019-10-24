@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM.Interfacess
 {
-    public interface ISubject
+    public interface IPublisher
     {
     }
 }

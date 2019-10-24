@@ -8,7 +8,7 @@ namespace ATM.Printers
 {
    public  class AreaMonitorPrinter
     {
-        public void Print(List<Plane>)
+        public void Print(List<Plane> planes)
         {
         }
     }

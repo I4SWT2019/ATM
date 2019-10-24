@@ -8,14 +8,15 @@ namespace ATM
 {
     public class Plane
     {
-        private string _tag;
-        private int _altitude, _longdetude, _latitude, _timestamp, _heading;
-        private double _velocity;
+        public int _velocity { get; set; }
+        public int _heading { get; set; }
+        public int _longitude { get; set; }
+        public int _latitude { get; set; }
+        public string _tag { get; set; }
+        public string _timestamp { get; set; }
 
-        public void SetAll(string tag, int altitude, int longdetude, int latitude, int timestamp, int heading, double velocity)
+        public Plane()
         {
-
         }
     }
-
 }
