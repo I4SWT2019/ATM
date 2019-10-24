@@ -57,6 +57,7 @@
     <Compile Include="Plane.cs" />
     <Compile Include="Printers\AreaMonitorPrinter.cs" />
     <Compile Include="Printers\SeparationPrinter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

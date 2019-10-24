@@ -12,6 +12,7 @@ namespace ATM
         public int _heading { get; set; }
         public int _longitude { get; set; }
         public int _latitude { get; set; }
+        public int _altitude { get; set; }
         public string _tag { get; set; }
         public string _timestamp { get; set; }
 
