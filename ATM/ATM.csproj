@@ -41,7 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaMonitor.cs" />
+    <Compile Include="ATM.cs" />
+    <Compile Include="Calculators\headingCalculator.cs" />
     <Compile Include="Calculators\VelocityCalculator.cs" />
+    <Compile Include="DataHandler.cs" />
+    <Compile Include="Plane.cs" />
+    <Compile Include="Printers\AreaMonitorPrinter.cs" />
     <Compile Include="Printers\SeparationPrinter.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
