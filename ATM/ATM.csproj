@@ -46,6 +46,7 @@
     <Compile Include="Calculators\headingCalculator.cs" />
     <Compile Include="Calculators\VelocityCalculator.cs" />
     <Compile Include="DataHandler.cs" />
+    <Compile Include="Interfaces\ICalculator.cs" />
     <Compile Include="Plane.cs" />
     <Compile Include="Printers\AreaMonitorPrinter.cs" />
     <Compile Include="Printers\SeparationPrinter.cs" />
