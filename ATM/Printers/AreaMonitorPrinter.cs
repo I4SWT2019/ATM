@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ATM.Printers
 {
-    class AreaMonitorPrinter
+   public  class AreaMonitorPrinter
     {
+        public void Print(List<Plane>)
+        {
+        }
     }
 }
