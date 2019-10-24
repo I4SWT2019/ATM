@@ -44,6 +44,9 @@
     <Compile Include="Calculators\VelocityCalculator.cs" />
     <Compile Include="CollisionWarner.cs" />
     <Compile Include="Interfacess\ICalculator.cs" />
+    <Compile Include="Interfacess\Iobserver.cs" />
+    <Compile Include="Interfacess\IPrinter.cs" />
+    <Compile Include="Interfacess\ISubject.cs" />
     <Compile Include="Printers\SeparationPrinter.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
