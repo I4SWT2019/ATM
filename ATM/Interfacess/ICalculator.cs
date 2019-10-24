@@ -8,5 +8,6 @@ namespace ATM.Interfacess
 {
     public interface ICalculator
     {
+        double Calculate(int[] x, int[] y);
     }
 }
