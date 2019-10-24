@@ -48,9 +48,9 @@
     <Compile Include="CollisionWarner.cs" />
     <Compile Include="DataHandler.cs" />
     <Compile Include="Interfacess\ICalculator.cs" />
-    <Compile Include="Interfacess\IObserver.cs" />
+    <Compile Include="Interfacess\ISubscriber.cs" />
     <Compile Include="Interfacess\IPrinter.cs" />
-    <Compile Include="Interfacess\ISubject.cs" />
+    <Compile Include="Interfacess\IPublisher.cs" />
     <Compile Include="Plane.cs" />
     <Compile Include="Printers\AreaMonitorPrinter.cs" />
     <Compile Include="Printers\SeparationPrinter.cs" />

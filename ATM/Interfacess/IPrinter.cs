@@ -8,6 +8,6 @@ namespace ATM.Interfacess
 {
     public interface IPrinter
     {
-        void Print(List<Plane>);
+        void Print(List<Plane> planes);
     }
 }
