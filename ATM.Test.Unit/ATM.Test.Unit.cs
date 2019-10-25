@@ -22,26 +22,22 @@ namespace ATM.Test.Unit
         [SetUp]
         public void Setup()
         {
-            _uut = new ATM(_areaPrinter, _velocityCalculator, _headingCalculator);
-
             _velocityCalculator = Substitute.For<ICalculator>();
             _headingCalculator = Substitute.For<ICalculator>();
             _areaPrinter = Substitute.For<IPrinter>();
+
+            _uut = new ATM(_areaPrinter, _velocityCalculator, _headingCalculator);
         }
 
         [Test]
         public void Print_areaPrinterCalled()
         {
-            // Arrange
-            Plane plane = new Plane();
-            List<Plane> planes = new List<Plane>();
-            planes.Add(plane);
-
+            // Nothing to Arrange
             // Act
             _uut.Print();
         
             // Assert
-            _areaPrinter.Received().Print(planes);
+            _areaPrinter.Received().Print(default);
         }
 
     }
