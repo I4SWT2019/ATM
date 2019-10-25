@@ -117,7 +117,10 @@ namespace ATM.Test.Unit
             _uut.CalcVelocity();
 
             // Assert
-            _velocityCalculator.Received(1).Calculate(p3, p1);
+            _velocityCalculator.Received(1).Calculate(
+                Arg.Is<int[]>(x => p3.SequenceEqual(x)),
+                Arg.Is<int[]>(x => p1.SequenceEqual(x))
+            );
         }
 
         [Test]
@@ -143,7 +146,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        public void CalcVelocity_HeadingCalculatorCalledWithValues()
+        public void CalcHeading_HeadingCalculatorCalledWithValues()
         {
             // Arrange
             _plane1._tag = "ABC123";
@@ -171,7 +174,10 @@ namespace ATM.Test.Unit
             _uut.CalcHeading();
 
             // Assert
-            _headingCalculator.Received(1).Calculate(p3, p1);
+            _headingCalculator.Received(1).Calculate(
+                Arg.Is<int[]>(x => p3.SequenceEqual(x)),
+                Arg.Is<int[]>(x => p1.SequenceEqual(x))
+                );
         }
 
         [Test]
@@ -186,7 +192,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        public void CalcVelocity_HeadingCalculatorNotCalled()
+        public void CalcHeading_HeadingCalculatorNotCalled()
         {
             // Arrange
             List<Plane> previousPlanes = new List<Plane>()

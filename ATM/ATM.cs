@@ -53,12 +53,11 @@ namespace ATM
                 // Finding and saving previous readings from tag of _planes
                 Plane tempPlane;
                 tempPlane = _previousPlanes.Find(prevPlane => prevPlane._tag == p._tag);
-                if (tempPlane != null)
-                {
-                    previous[0] = tempPlane._longitude;
-                    previous[1] = tempPlane._latitude;
-                    previous[2] = Int32.Parse(tempPlane._timestamp.Substring(12, 5));
-                }
+                if (tempPlane == null)
+                    return;
+                previous[0] = tempPlane._longitude;
+                previous[1] = tempPlane._latitude;
+                previous[2] = Int32.Parse(tempPlane._timestamp.Substring(12, 5));
 
                 // Saving current readings
                 current[0] = p._longitude;
@@ -85,13 +84,12 @@ namespace ATM
                 // Finding and saving previous readings from tag of _planes
                 Plane tempPlane; 
                 tempPlane = _previousPlanes.Find(prevPlane => prevPlane._tag == p._tag);
-                if (tempPlane != null)
-                {
-                    previous[0] = tempPlane._longitude;
-                    previous[1] = tempPlane._latitude;
-                }
+                if (tempPlane == null)
+                    return;
+                previous[0] = tempPlane._longitude;
+                previous[1] = tempPlane._latitude;
 
-                // Saving current readings
+                    // Saving current readings
                 current[0] = p._longitude;
                 current[1] = p._latitude;
 
