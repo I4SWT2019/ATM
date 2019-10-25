@@ -45,14 +45,19 @@ namespace ATM
             int[] previous = new int[3];
             int[] current = new int[3];
 
+            if (_planes == null)
+                return;
             foreach (Plane p in _planes)
             {
                 // Finding and saving previous readings from tag of _planes
                 Plane tempPlane;
                 tempPlane = _previousPlanes.Find(prevPlane => prevPlane._tag == p._tag);
-                previous[0] = tempPlane._longitude;
-                previous[1] = tempPlane._latitude;
-                previous[2] = Int32.Parse(tempPlane._timestamp.Substring(12, 5));
+                if (tempPlane != null)
+                {
+                    previous[0] = tempPlane._longitude;
+                    previous[1] = tempPlane._latitude;
+                    previous[2] = Int32.Parse(tempPlane._timestamp.Substring(12, 5));
+                }
 
                 // Saving current readings
                 current[0] = p._longitude;
