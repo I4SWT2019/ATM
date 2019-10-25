@@ -47,6 +47,7 @@ namespace ATM
 
             if (_planes == null)
                 return;
+
             foreach (Plane p in _planes)
             {
                 // Finding and saving previous readings from tag of _planes
@@ -76,13 +77,19 @@ namespace ATM
             int[] previous = new int[2];
             int[] current = new int[2];
 
+            if (_planes == null)
+                return;
+
             foreach (Plane p in _planes)
             {
                 // Finding and saving previous readings from tag of _planes
-                Plane tempPlane;
+                Plane tempPlane; 
                 tempPlane = _previousPlanes.Find(prevPlane => prevPlane._tag == p._tag);
-                previous[0] = tempPlane._longitude;
-                previous[1] = tempPlane._latitude;
+                if (tempPlane != null)
+                {
+                    previous[0] = tempPlane._longitude;
+                    previous[1] = tempPlane._latitude;
+                }
 
                 // Saving current readings
                 current[0] = p._longitude;

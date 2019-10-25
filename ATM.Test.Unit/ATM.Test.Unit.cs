@@ -75,6 +75,17 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        public void CalcVelocity_NoPlanesIn_planes()
+        {
+            // Nothing to Arrange
+            // Act
+            _uut.CalcVelocity();
+
+            //Assert
+            _velocityCalculator.DidNotReceive().Calculate(default, default);
+        }
+
+        [Test]
         public void CalcVelocity_VelocityCalculatorCalledWithValues()
         {
             // Arrange
@@ -99,13 +110,14 @@ namespace ATM.Test.Unit
             {
                 _plane1
             };
+
+            // Act
             _uut.Update(previousPlanes);
             _uut.Update(planes);
-            // Act
             _uut.CalcVelocity();
 
             // Assert
-            _velocityCalculator.ReceivedWithAnyArgs(1).Calculate(p3, p1);
+            _velocityCalculator.Received(1).Calculate(p3, p1);
         }
 
         [Test]
@@ -120,9 +132,10 @@ namespace ATM.Test.Unit
             List<Plane> planes = new List<Plane>()
             {
             };
+
+            // Act
             _uut.Update(previousPlanes);
             _uut.Update(planes);
-            // Act
             _uut.CalcVelocity();
 
             // Assert
@@ -151,13 +164,25 @@ namespace ATM.Test.Unit
             {
                 _plane1
             };
+
+            // Act
             _uut.Update(previousPlanes);
             _uut.Update(planes);
-            // Act
             _uut.CalcHeading();
 
             // Assert
-            _headingCalculator.ReceivedWithAnyArgs(1).Calculate(p3, p1);
+            _headingCalculator.Received(1).Calculate(p3, p1);
+        }
+
+        [Test]
+        public void CalcHeading_NoPlanesIn_planes()
+        {
+            // Nothing to Arrange
+            // Act
+            _uut.CalcHeading();
+
+            //Assert
+            _headingCalculator.DidNotReceive().Calculate(default, default);
         }
 
         [Test]
