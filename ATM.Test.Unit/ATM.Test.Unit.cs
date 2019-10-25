@@ -86,6 +86,50 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        public void CalcVelocity_OnlyPlanesIn_Planes()
+        {
+            // Arrange
+            List<Plane> previousPlanes = new List<Plane>()
+            {
+            };
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane2,
+                _plane3
+            };
+
+            // Act
+            _uut.Update(previousPlanes);
+            _uut.Update(planes);
+            _uut.CalcVelocity();
+
+            // Assert
+            _velocityCalculator.DidNotReceive().Calculate(default, default);
+        }
+
+        [Test]
+        public void CalcVelocity_OnlyPlanesIn_previousPlanes()
+        {
+            // Arrange
+            List<Plane> previousPlanes = new List<Plane>()
+            {
+                _plane2,
+                _plane3
+            };
+            List<Plane> planes = new List<Plane>()
+            {
+            };
+
+            // Act
+            _uut.Update(previousPlanes);
+            _uut.Update(planes);
+            _uut.CalcVelocity();
+
+            // Assert
+            _velocityCalculator.DidNotReceive().Calculate(default, default);
+        }
+
+        [Test]
         public void CalcVelocity_VelocityCalculatorCalledWithValues()
         {
             // Arrange
@@ -124,7 +168,18 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        public void CalcVelocity_VelocityCalculatorNotCalled()
+        public void CalcHeading_NoPlanesIn_planes()
+        {
+            // Nothing to Arrange
+            // Act
+            _uut.CalcHeading();
+
+            //Assert
+            _headingCalculator.DidNotReceive().Calculate(default, default);
+        }
+
+        [Test]
+        public void CalcHeading_OnlyPlanesIn_previousPlanes()
         {
             // Arrange
             List<Plane> previousPlanes = new List<Plane>()
@@ -135,16 +190,36 @@ namespace ATM.Test.Unit
             List<Plane> planes = new List<Plane>()
             {
             };
+            _uut.Update(previousPlanes);
+            _uut.Update(planes);
+            // Act
+            _uut.CalcHeading();
+
+            // Assert
+            _headingCalculator.DidNotReceive().Calculate(default, default);
+        }
+
+        [Test]
+        public void CalcHeading_OnlyPlanesIn_Planes()
+        {
+            // Arrange
+            List<Plane> previousPlanes = new List<Plane>()
+            {
+            };
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane2,
+                _plane3
+            };
 
             // Act
             _uut.Update(previousPlanes);
             _uut.Update(planes);
-            _uut.CalcVelocity();
+            _uut.CalcHeading();
 
             // Assert
-            _velocityCalculator.DidNotReceive().Calculate(default, default);
+            _headingCalculator.DidNotReceive().Calculate(default, default);
         }
-
         [Test]
         public void CalcHeading_HeadingCalculatorCalledWithValues()
         {
@@ -180,36 +255,6 @@ namespace ATM.Test.Unit
                 );
         }
 
-        [Test]
-        public void CalcHeading_NoPlanesIn_planes()
-        {
-            // Nothing to Arrange
-            // Act
-            _uut.CalcHeading();
-
-            //Assert
-            _headingCalculator.DidNotReceive().Calculate(default, default);
-        }
-
-        [Test]
-        public void CalcHeading_HeadingCalculatorNotCalled()
-        {
-            // Arrange
-            List<Plane> previousPlanes = new List<Plane>()
-            {
-                _plane2,
-                _plane3
-            };
-            List<Plane> planes = new List<Plane>()
-            {
-            };
-            _uut.Update(previousPlanes);
-            _uut.Update(planes);
-            // Act
-            _uut.CalcVelocity();
-
-            // Assert
-            _headingCalculator.DidNotReceive().Calculate(default, default);
-        }
+       
     }
 }
