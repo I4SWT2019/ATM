@@ -9,21 +9,26 @@ namespace ATM
 {
     class DataHandler : Plane
     {
- 
+        private string _receivedData;
+
+        public List<Plane> _planes = new List<Plane>();
+
         private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             // Create planes from DataEvent
             foreach (var data in e.TransponderData)
             {
-                Plane thePlane = new Plane();
-                thePlane._tag = data.Substring(0, 6);
-                thePlane._latitude = int.Parse(data.Substring(8, 5));
-                thePlane._longitude = int.Parse(data.Substring(13, 5));
-                thePlane._altitude = int.Parse(data.Substring(20, 5));
-                thePlane._timestamp = data.Substring(27, 17);
+                Plane thisPlane = new Plane();
+                thisPlane._tag = data.Substring(0, 6);
+                thisPlane._latitude = int.Parse(data.Substring(8, 5));
+                thisPlane._longitude = int.Parse(data.Substring(13, 5));
+                thisPlane._altitude = int.Parse(data.Substring(20, 5));
+                thisPlane._timestamp = data.Substring(27, 17);
+
+                _planes.Add(thisPlane); 
             }
         }
 
-        List<Plane> ListOfAllPlanes = new List<Plane>();
+
     }
 }
