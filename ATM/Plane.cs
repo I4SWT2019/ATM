@@ -8,7 +8,7 @@ namespace ATM
 {
     public class Plane
     {
-        public int _velocity { get; set; }
+        public double _velocity { get; set; }
         public int _heading { get; set; }
         public int _longitude { get; set; }
         public int _latitude { get; set; }
@@ -18,6 +18,26 @@ namespace ATM
 
         public Plane()
         {
+        }
+
+        public void setAll(Plane thisPlane, string tag, int latitude ,int longitude ,int altitude, string timestamp, double velocity, int heading)
+        {
+            thisPlane._tag = tag;
+            thisPlane._latitude = latitude;
+            thisPlane._longitude = longitude;
+            thisPlane._altitude = altitude;
+            thisPlane._timestamp = timestamp;
+            thisPlane._velocity = velocity;
+            thisPlane._heading = heading;
+            
+        }
+        public void setAll(Plane thisPlane, string tag, int latitude, int longitude, int altitude, string timestamp)
+        {
+            thisPlane._tag = tag;
+            thisPlane._latitude = latitude;
+            thisPlane._longitude = longitude;
+            thisPlane._altitude = altitude;
+            thisPlane._timestamp = timestamp;
         }
     }
 }
