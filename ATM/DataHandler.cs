@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
 
+
 namespace ATM
 {
-    class DataHandler : Plane
+    class DataHandler
     {
         private string _receivedData;
 
@@ -19,15 +20,21 @@ namespace ATM
             foreach (var data in e.TransponderData)
             {
                 Plane thisPlane = new Plane();
-                thisPlane._tag = data.Substring(0, 6);
-                thisPlane._latitude = int.Parse(data.Substring(8, 5));
-                thisPlane._longitude = int.Parse(data.Substring(13, 5));
-                thisPlane._altitude = int.Parse(data.Substring(20, 5));
-                thisPlane._timestamp = data.Substring(27, 17);
+
+                thisPlane.setAll(thisPlane, 
+                    data.Substring(0, 6), 
+                    int.Parse(data.Substring(8, 5)), 
+                    int.Parse(data.Substring(13, 5)), 
+                    int.Parse(data.Substring(20, 5)), 
+                    data.Substring(27, 17));
 
                 _planes.Add(thisPlane); 
+
             }
         }
+
+        public delegate void PlanesReadyEvent();
+        public PlanesReadyEvent PlanesReady;
 
 
     }
