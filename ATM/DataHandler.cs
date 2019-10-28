@@ -8,34 +8,63 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    class DataHandler
+    public /*sealed*/ class DataHandler
     {
-        private string _receivedData;
+        public /*private*/ DataHandler()
+        {
+
+        }
+                /*
+
+        private static DataHandler instance = null;
+
+        public static DataHandler instance
+        {
+            get
+            {
+                if(instance ==null)
+                {
+                    instance = new DataHandler();
+                }
+                return instance;
+            }
+
+        }
+        */
+        public event EventHandler PlanesReady;
+
+        public void FormattedDataReady()
+        {
+            if (PlanesReady != null)
+                PlanesReady(this, EventArgs.Empty);
+            Console.WriteLine("Formatted Data ready");
+        }
 
         public List<Plane> _planes = new List<Plane>();
 
-        private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
+        // Subscribe/Receive event with RawData from Transponder
+        public void ReceivedData(object sender, RawTransponderDataEventArgs e)
         {
-            // Create planes from DataEvent
             foreach (var data in e.TransponderData)
             {
-                Plane thisPlane = new Plane();
-
-                thisPlane.setAll(thisPlane, 
-                    data.Substring(0, 6), 
-                    int.Parse(data.Substring(8, 5)), 
-                    int.Parse(data.Substring(13, 5)), 
-                    int.Parse(data.Substring(20, 5)), 
-                    data.Substring(27, 17));
-
-                _planes.Add(thisPlane); 
-
+                HandleData(data);
             }
         }
 
-        public delegate void PlanesReadyEvent();
-        public PlanesReadyEvent PlanesReady;
+        public void HandleData(string data)
+        {
+            Plane thisPlane = new Plane();
 
+            thisPlane.setAll(thisPlane,
+                data.Substring(0, 6),
+                int.Parse(data.Substring(8, 5)),
+                int.Parse(data.Substring(13, 5)),
+                int.Parse(data.Substring(20, 5)),
+                data.Substring(27, 17));
 
+            _planes.Add(thisPlane);
+
+            FormattedDataReady();
+        }
     }
 }
