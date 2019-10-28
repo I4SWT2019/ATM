@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverUser", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverApplication", "TransponderReceiverApplication\TransponderReceiverApplication.csproj", "{5BF5A5A7-E181-4321-A362-D16F4849586A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TrasnponderReceiver", "TrasnponderReceiver", "{E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TransponderReceiver", "TransponderReceiver", "{E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
