@@ -10,22 +10,28 @@ namespace ATM.Calculators
 {
     public class VelocityCalculator : ICalculator
     {
-        public double Calculate(int[] x, int[] y)
+        public double Calculate(int[] oldData, int[] newData)
         {
             //varibles ar init here:
             double Velocity = 0, diffX = 0, diffY = 0, totalTime = 0, travelDistance = 0;
 
 
             //difference between the differnt data points are calculated here
-            diffX = Math.Abs(x[0] - y[0]);
-            diffY = Math.Abs(x[1] - y[1]);
-            totalTime = Math.Abs(x[2] - y[2]);
+            diffX = Math.Abs(oldData[0] - newData[0]);
+            diffY = Math.Abs(oldData[1] - newData[1]);
+            totalTime = Math.Abs(oldData[2] - newData[2]);
+
+            if (totalTime > 55000)
+            {
+                totalTime = Math.Abs(oldData[2] - (newData[2] + 60000));
+            }
 
             //the difference in placement, travelled distance using pythagorian math
             travelDistance = Math.Sqrt(((diffX * diffX) + (diffY * diffY)));
 
-
-            Velocity += (travelDistance / totalTime);
+            //Here to velocity is calculated as distance over time, but because the time scale is 10^-3 seconds
+            //is must be converted to seconds by dividing w. 1,000
+            Velocity = (travelDistance / (totalTime / 1000)); // m/s
 
             return Velocity;
         }
