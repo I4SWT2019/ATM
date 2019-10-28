@@ -10,11 +10,19 @@ namespace ATM
     {
         public List<Plane> _planesInArea = new List<Plane>();
 
+        public DataHandler _dataHandler = new DataHandler();
+
+        public AreaMonitor()
+        {
+            // Sub to event
+            /*
+            _dataHandler.PlanesReady += new EventHandler(_dataHandler_PlanesReady);
+            _dataHandler.HandleReceivedData();
+            */
+        }
+
         public void HandleReceivedData()
         {
-            if (PlanesReady != null)
-                PlanesReady();
-
             // Get the first element in the list
             Plane FirstPLane = _planes.First();
 
