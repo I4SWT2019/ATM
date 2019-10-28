@@ -26,9 +26,6 @@ namespace ATM
         {
             _previousPlanes = _planes;
             _planes = planes;
-            CalcVelocity();
-            CalcHeading();
-            Print();
         }
 
         public void Run()
