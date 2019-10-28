@@ -7,8 +7,9 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    class DataHandler
+    class DataHandler : Plane
     {
+ 
         private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             // Create planes from DataEvent
@@ -22,5 +23,7 @@ namespace ATM
                 thePlane._timestamp = data.Substring(27, 17);
             }
         }
+
+        List<Plane> ListOfAllPlanes = new List<Plane>();
     }
 }

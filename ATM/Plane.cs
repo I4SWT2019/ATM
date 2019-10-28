@@ -19,5 +19,14 @@ namespace ATM
         public Plane()
         {
         }
+
+        public void setAll(Plane thisPlane, string tag, int latitude ,int longitude ,int altitude, string timestamp)
+        {
+            thisPlane._tag = tag;
+            thisPlane._latitude = latitude;
+            thisPlane._longitude = longitude;
+            thisPlane._altitude = altitude;
+            thisPlane._timestamp = timestamp;
+        }
     }
 }
