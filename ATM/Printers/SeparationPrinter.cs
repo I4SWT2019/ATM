@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.Interfacess;
 
 namespace ATM.Printers
 {
-    class SeparationPrinter
+    public class SeparationPrinter : IPrinter
     {
+        public void Print(List<Plane> planes)
+        {
+            Console.WriteLine("!!! Separation Warning !!!");
+            Console.WriteLine($"Plane {planes[0]._tag} and {planes[1]} are too close");
+        }
     }
 }

@@ -10,9 +10,9 @@ namespace ATM.Test.Unit
 {
     [TestFixture]
     [Author("I4SWT2019Gr2")]
-    public class AreaPrinterUnitTest
+    public class SeparationPrinterUnitTest
     {
-        private AreaMonitorPrinter _uut;
+        private SeparationPrinter _uut;
         private Plane _plane1;
         private Plane _plane2;
         private StringWriter _sw;
@@ -23,8 +23,8 @@ namespace ATM.Test.Unit
             _plane1 = Substitute.For<Plane>();
             _plane2 = Substitute.For<Plane>();
             _sw = Substitute.For<StringWriter>();
-            _uut = new AreaMonitorPrinter();
-            
+            _uut = new SeparationPrinter();
+
 
         }
 
@@ -42,7 +42,7 @@ namespace ATM.Test.Unit
             // WriteLine is called 1 + 6*n where n is number of Plane in planes
             _uut.Print(planes);
             // Assert
-            _sw.Received(1+(planes.Count*6)).WriteLine(Arg.Any<string>());
+            _sw.Received(2).WriteLine(Arg.Any<string>());
         }
     }
 }
