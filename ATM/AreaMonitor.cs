@@ -6,25 +6,23 @@ using System.Threading.Tasks;
 
 namespace ATM
 {
-    class AreaMonitor : DataHandler
+    class AreaMonitor : Interfacess.ISubject
     {
         public List<Plane> _planesInArea = new List<Plane>();
 
-        public DataHandler _dataHandler = new DataHandler();
+        public List<Plane> _planesFromDataHandler = new List<Plane>();
+
+        private List<Interfacess.IObserver> _observers = new List<Interfacess.IObserver>();
 
         public AreaMonitor()
         {
-            // Sub to event
-            /*
-            _dataHandler.PlanesReady += new EventHandler(_dataHandler_PlanesReady);
-            _dataHandler.HandleReceivedData();
-            */
+
         }
 
         public void HandleReceivedData()
         {
             // Get the first element in the list
-            Plane FirstPLane = _planes.First();
+            Plane FirstPLane = _planesFromDataHandler.First();
 
             // Check if planes in List are in monitoring area
             if (((90000 > FirstPLane._latitude) && (FirstPLane._latitude > 10000)) && 
@@ -35,9 +33,27 @@ namespace ATM
         public void UpdateArea(Plane _plane)
         {
             _planesInArea.Add(_plane);
-            
-            // TELL SUBBIE THAT PLANES ARE IN LIST
+            Notify();
         }
 
+        /* 
+        Observer Pattern
+        */
+        public void Notify()
+        {
+            foreach (var observer in _observers)
+            {
+                observer.Update(_planesInArea);
+            }
+
+        }
+        public void Attach(Interfacess.IObserver observer)
+        {
+            this._observers.Add(observer);
+        }
+        public void Detach(Interfacess.IObserver observer)
+        {
+            this._observers.Remove(observer);
+        }
     }
 }

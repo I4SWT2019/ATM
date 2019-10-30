@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATM.Interfacess
 {
-    public interface ISubscriber
+    interface IObserver
     {
+        void Update(List<Plane> planes);
     }
 }
