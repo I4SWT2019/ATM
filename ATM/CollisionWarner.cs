@@ -7,7 +7,7 @@ using ATM.Interfacess;
 
 namespace ATM
 {
-    public class CollisionWarner : ISubscriber
+    public class CollisionWarner : Interfacess.IObserver
     {
         private IPrinter _separationPrinter;
 
