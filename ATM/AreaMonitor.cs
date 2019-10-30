@@ -17,15 +17,10 @@ namespace ATM
         public AreaMonitor(DataHandler _dataHandler)
         {
             _dataHandler.PlaneAddedEvent += HandleReceivedData;
-            
-            //_planesFromDataHandler = _dataHandler._eventPlaneList;
         }
 
         public void HandleReceivedData(object sender, PlaneAddedEventArgs e)
         {
-            // Get the first element in the list
-
-
             bool IN_AREA = true;
             bool NOT_IN_AREA = false;
 
@@ -34,8 +29,6 @@ namespace ATM
                 ((90000 > e.Plane._longitude) && (e.Plane._longitude > 10000)))
                 UpdateArea(e.Plane, IN_AREA);
             else UpdateArea(e.Plane, NOT_IN_AREA);
-
-            // Remove the handled element from _plans list
         }
 
         public void UpdateArea(Plane _plane, bool PlaneInArea)

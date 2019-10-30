@@ -4,22 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
+using ATM.Interfacess;
 
 
 namespace ATM
 {
-    public class DataHandler
+    public class DataHandler : IDataHandler
     {
         private ITransponderReceiver _receiver;
+
+        public event EventHandler<PlaneAddedEventArgs> PlaneAddedEvent;
+
         public DataHandler(ITransponderReceiver receiver)
         {
             _receiver = receiver;
 
             _receiver.TransponderDataReady += ReceivedData;
         }
+        public DataHandler()
+        {
 
-        public event EventHandler<PlaneAddedEventArgs> PlaneAddedEvent;
-        // Subscribe/Receive event with RawData from Transponder
+        }
+
+       
+
         public void ReceivedData(object sender, RawTransponderDataEventArgs e)
         {
             foreach (var data in e.TransponderData)
@@ -42,7 +50,7 @@ namespace ATM
             OnPlaneListUpdateEvent(new PlaneAddedEventArgs { Plane = thisPlane });
         }
 
-        public virtual void OnPlaneListUpdateEvent(PlaneAddedEventArgs e)
+        protected virtual void OnPlaneListUpdateEvent(PlaneAddedEventArgs e)
         {
             PlaneAddedEvent?.Invoke(this, e);
         }

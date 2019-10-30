@@ -63,6 +63,7 @@
     <Compile Include="AreaPrinter.Test.Unit.cs" />
     <Compile Include="ATM.Test.Unit.cs" />
     <Compile Include="CollisionWarner.Test.Unit.cs" />
+    <Compile Include="DataHandler.Test.Unit.cs" />
     <Compile Include="HeadingCalc.Test.Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeparationPrinter.Test.Unit.cs" />

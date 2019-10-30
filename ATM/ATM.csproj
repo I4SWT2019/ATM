@@ -71,6 +71,7 @@
     <Compile Include="Calculators\VelocityCalculator.cs" />
     <Compile Include="CollisionWarner.cs" />
     <Compile Include="DataHandler.cs" />
+    <Compile Include="Interfacess\IDataHandler.cs" />
     <Compile Include="Interfacess\ICalculator.cs" />
     <Compile Include="Interfacess\IObserver.cs" />
     <Compile Include="Interfacess\ISubject.cs" />
