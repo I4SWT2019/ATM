@@ -64,7 +64,6 @@ namespace ATM.Test.Unit
             _uut.Update(planes);
             _uut.Print();
             _uut.Update(newPlanes);
-            _uut.Print();
 
             // Assert
             Received.InOrder(() =>
@@ -158,7 +157,6 @@ namespace ATM.Test.Unit
             // Act
             _uut.Update(previousPlanes);
             _uut.Update(planes);
-            _uut.CalcVelocity();
 
             // Assert
             _velocityCalculator.Received(1).Calculate(
@@ -246,7 +244,6 @@ namespace ATM.Test.Unit
             // Act
             _uut.Update(previousPlanes);
             _uut.Update(planes);
-            _uut.CalcHeading();
 
             // Assert
             _headingCalculator.Received(1).Calculate(
