@@ -11,26 +11,14 @@ namespace ATM
     public class DataHandler
     {
         private ITransponderReceiver _receiver;
-        public /*private*/ DataHandler(ITransponderReceiver receiver)
+        public DataHandler(ITransponderReceiver receiver)
         {
             _receiver = receiver;
 
             _receiver.TransponderDataReady += ReceivedData;
         }
 
-        public enum MyEvent
-        {
-             
-        }
-
-        //private static DataHandler instance = null;
-
-        public delegate void MyEventHandler(MyEvent e);
-
         public event EventHandler<PlaneAddedEventArgs> PlaneAddedEvent;
-
-        public List<Plane> _planes = new List<Plane>();
-        public List<Plane> _eventPlaneList = new List<Plane>();
         // Subscribe/Receive event with RawData from Transponder
         public void ReceivedData(object sender, RawTransponderDataEventArgs e)
         {
@@ -51,10 +39,7 @@ namespace ATM
                 int.Parse(data.Substring(20, 5)),
                 data.Substring(27, 17));
 
-            _planes.Add(thisPlane);
-
             OnPlaneListUpdateEvent(new PlaneAddedEventArgs { Plane = thisPlane });
-
         }
 
         public virtual void OnPlaneListUpdateEvent(PlaneAddedEventArgs e)
