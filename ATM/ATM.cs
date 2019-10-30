@@ -8,7 +8,7 @@ using ATM.Interfacess;
 
 namespace ATM
 {
-    public class ATM : Interfacess.IObserver
+    public class ATM : IObserver
     {
         private List<Plane> _planes;
         private List<Plane> _previousPlanes;

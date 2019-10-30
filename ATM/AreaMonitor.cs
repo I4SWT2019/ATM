@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.Interfacess;
 
 namespace ATM
 {
-    class AreaMonitor : DataHandler, Interfacess.ISubject
+    class AreaMonitor : DataHandler, ISubject
     {
         public List<Plane> _planesInArea = new List<Plane>();
 
         public List<Plane> _planesFromDataHandler = new List<Plane>();
 
-        private List<Interfacess.IObserver> _observers = new List<Interfacess.IObserver>();
+        private List<IObserver> _observers = new List<IObserver>();
 
         public AreaMonitor()
         {
@@ -51,11 +52,11 @@ namespace ATM
             }
 
         }
-        public void Attach(Interfacess.IObserver observer)
+        public void Attach(IObserver observer)
         {
             this._observers.Add(observer);
         }
-        public void Detach(Interfacess.IObserver observer)
+        public void Detach(IObserver observer)
         {
             this._observers.Remove(observer);
         }
