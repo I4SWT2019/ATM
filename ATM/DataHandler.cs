@@ -10,10 +10,12 @@ namespace ATM
 {
     public class DataHandler
     {
-
-        public /*private*/ DataHandler()
+        private ITransponderReceiver _receiver;
+        public /*private*/ DataHandler(ITransponderReceiver receiver)
         {
+            _receiver = receiver;
 
+            _receiver.TransponderDataReady += ReceivedData;
         }
 
         public enum MyEvent
@@ -25,14 +27,7 @@ namespace ATM
 
         public delegate void MyEventHandler(MyEvent e);
 
-        public event EventHandler<MyEventHandler> EventTriggered;
-
-        //public void FormattedDataReady()
-        /*{
-            if (PlanesReady != null)
-                PlanesReady(this, EventArgs.Empty);
-            Console.WriteLine("Formatted Data ready");
-        }*/
+        public event EventHandler<PlaneAddedEventArgs> PlaneAddedEvent;
 
         public List<Plane> _planes = new List<Plane>();
         public List<Plane> _eventPlaneList = new List<Plane>();
@@ -58,15 +53,13 @@ namespace ATM
 
             _planes.Add(thisPlane);
 
-            OnPlaneListUpdateEvent(new MyEventHandler(delegate(MyEvent eMyEvent)
-            {
-                _eventPlaneList = _planes;
-            }));
+            OnPlaneListUpdateEvent(new PlaneAddedEventArgs { Plane = thisPlane });
+
         }
 
-        public virtual void OnPlaneListUpdateEvent(MyEventHandler e)
+        public virtual void OnPlaneListUpdateEvent(PlaneAddedEventArgs e)
         {
-            EventTriggered?.Invoke(this, e);
+            PlaneAddedEvent?.Invoke(this, e);
         }
     }
 }

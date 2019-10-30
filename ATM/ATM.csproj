@@ -76,6 +76,7 @@
     <Compile Include="Interfacess\ISubject.cs" />
     <Compile Include="Interfacess\IPrinter.cs" />
     <Compile Include="Plane.cs" />
+    <Compile Include="PlaneAddedEventArgs.cs" />
     <Compile Include="Printers\AreaMonitorPrinter.cs" />
     <Compile Include="Printers\SeparationPrinter.cs" />
     <Compile Include="Program.cs" />
