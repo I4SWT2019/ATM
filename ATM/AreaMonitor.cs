@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM
 {
-    class AreaMonitor : Interfacess.ISubject
+    class AreaMonitor : DataHandler, Interfacess.ISubject
     {
         public List<Plane> _planesInArea = new List<Plane>();
 
@@ -22,12 +22,16 @@ namespace ATM
         public void HandleReceivedData()
         {
             // Get the first element in the list
-            Plane FirstPLane = _planesFromDataHandler.First();
+            Plane FirstPLane = _planes.First();
 
             // Check if planes in List are in monitoring area
-            if (((90000 > FirstPLane._latitude) && (FirstPLane._latitude > 10000)) && 
+            if (((90000 > FirstPLane._latitude) && (FirstPLane._latitude > 10000)) &&
                 ((90000 > FirstPLane._longitude) && (FirstPLane._longitude > 10000)))
                 UpdateArea(FirstPLane);
+
+            // Remove the handled element from _plans list
+            _planes.Remove(FirstPLane);
+
         }
 
         public void UpdateArea(Plane _plane)
