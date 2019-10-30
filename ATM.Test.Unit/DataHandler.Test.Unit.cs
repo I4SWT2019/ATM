@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using NSubstitute;
 using NSubstitute.Core.Arguments;
 using NUnit.Framework;
+using ATM.Interfacess;
+using TransponderReceiver;
 
 namespace ATM.Test.Unit
 {
