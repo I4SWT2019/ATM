@@ -24,9 +24,9 @@ namespace ATM.Test.Unit
         public void Setup()
         {
             _separationPrinter = Substitute.For<IPrinter>();
-            _plane1 = Substitute.For<Plane>();
-            _plane2 = Substitute.For<Plane>();
-            _plane3 = Substitute.For<Plane>();
+            _plane1 = new Plane();
+            _plane2 = new Plane();
+            _plane3 = new Plane();
             _uut = new CollisionWarner(_separationPrinter);
         }
 
@@ -193,6 +193,55 @@ namespace ATM.Test.Unit
             _separationPrinter.DidNotReceive().Print(planes);
 
         }
+
+        [Test]
+        public void WarningCheck_ThirdPlaneWithDifferentAltitude()
+        {
+            //Arrange
+            _plane1._altitude = 1000;
+            _plane1._latitude = 1000;
+            _plane1._longitude = 1000;
+            _plane2._altitude = 1000;
+            _plane2._latitude = 5000;
+            _plane2._longitude = 5000;
+            _plane3._altitude = 1500;
+            _plane3._latitude = 1000;
+            _plane3._longitude = 1000;
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1,
+                _plane2,
+                _plane3
+            };
+            //Act
+            _uut.Update(planes);
+            //Assert
+            _separationPrinter.DidNotReceive().Print(planes);
+        }
         
+        [Test]
+        public void WarningCheck_FirstPlaneWithTwoWarnings()
+        {
+            //Arrange
+            _plane1._altitude = 2000;
+            _plane1._latitude = 2000;
+            _plane1._longitude = 2000;
+            _plane2._altitude = 2299;
+            _plane2._latitude = 1499;
+            _plane2._longitude = 1499;
+            _plane3._altitude = 1701;
+            _plane3._latitude = 2499;
+            _plane3._longitude = 2499;
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1, 
+                _plane2, 
+                _plane3
+            };
+            //Act
+            _uut.Update(planes);
+            //Assert
+            _separationPrinter.ReceivedWithAnyArgs(2).Print(default);
+        }
     }
 }
