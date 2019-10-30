@@ -7,7 +7,7 @@ using ATM.Interfacess;
 
 namespace ATM
 {
-    public class CollisionWarner : ISubscriber
+    public class CollisionWarner : Interfacess.IObserver
     {
         private IPrinter _separationPrinter;
 
@@ -43,12 +43,12 @@ namespace ATM
                     {
                         if (j == planes.Count) 
                             break;
-                        deltaZ = planes[j]._altitude - planes[i]._altitude;
+                        deltaZ = Math.Abs(planes[j]._altitude - planes[i]._altitude);
                         if (deltaZ >= 300) 
                             break;
                         deltaX = Math.Pow(planes[j]._longitude - planes[i]._longitude, 2);
                         deltaY = Math.Pow(planes[j]._latitude - planes[i]._latitude, 2);
-                        distance = Math.Sqrt(deltaX - deltaY);
+                        distance = Math.Sqrt(deltaX + deltaY);
 
                         // Go to next index if distance is acceptable
                         // AND index i's and j+1's altitude is different

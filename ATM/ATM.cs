@@ -8,7 +8,7 @@ using ATM.Interfacess;
 
 namespace ATM
 {
-    public class ATM : ISubscriber
+    public class ATM : IObserver
     {
         private List<Plane> _planes;
         private List<Plane> _previousPlanes;
@@ -26,10 +26,17 @@ namespace ATM
         {
             _previousPlanes = _planes;
             _planes = planes;
+            RunPlaneUpdate();
         }
 
-        public void Run()
+        public void RunPlaneUpdate()
         {
+            if(_planes != null && _previousPlanes != null)
+            { 
+                CalcVelocity();
+                CalcHeading();
+                Print();
+            }
         }
 
         public void Print()
@@ -57,14 +64,17 @@ namespace ATM
                     return;
                 previous[0] = tempPlane._longitude;
                 previous[1] = tempPlane._latitude;
-                previous[2] = Int32.Parse(tempPlane._timestamp.Substring(12, 5));
+                if(tempPlane._timestamp != null)
+                    previous[2] = Int32.Parse(tempPlane._timestamp.Substring(12, 5));
 
                 // Saving current readings
                 current[0] = p._longitude;
                 current[1] = p._latitude;
-                current[2] = Int32.Parse(p._timestamp.Substring(12, 5));
-
-                p._velocity = Convert.ToInt32(_velocityCalc.Calculate(previous, current));
+                if (p._timestamp != null)
+                {
+                    current[2] = Int32.Parse(p._timestamp.Substring(12, 5));
+                    p._velocity = Convert.ToInt32(_velocityCalc.Calculate(previous, current));
+                }
             }
         }
 

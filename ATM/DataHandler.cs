@@ -8,7 +8,7 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    public /*sealed*/ class DataHandler
+    public class DataHandler
     {
 
         public /*private*/ DataHandler()
