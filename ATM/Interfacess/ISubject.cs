@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ATM.Interfacess
 {
-    public interface IPublisher
+    interface ISubject
     {
+        void Attach(IObserver observer);
+        void Detach(IObserver observer);
+        void Notify();
     }
+
 }

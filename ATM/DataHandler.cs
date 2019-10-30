@@ -8,36 +8,17 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    public /*sealed*/ class DataHandler
+    public class DataHandler
     {
-        public /*private*/ DataHandler()
+        public  DataHandler()
         {
 
         }
-                /*
 
-        private static DataHandler instance = null;
-
-        public static DataHandler instance
-        {
-            get
-            {
-                if(instance ==null)
-                {
-                    instance = new DataHandler();
-                }
-                return instance;
-            }
-
-        }
-        */
-        public event EventHandler PlanesReady;
 
         public void FormattedDataReady()
         {
-            if (PlanesReady != null)
-                PlanesReady(this, EventArgs.Empty);
-            Console.WriteLine("Formatted Data ready");
+            // EVENT TO AREAMONITOR
         }
 
         public List<Plane> _planes = new List<Plane>();
