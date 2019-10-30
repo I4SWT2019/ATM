@@ -14,6 +14,7 @@ namespace ATM
         public List<Plane> _planesFromDataHandler = new List<Plane>();
 
         private List<IObserver> _observers = new List<IObserver>();
+        private DataHandler _dataHandler = new DataHandler();
 
         public AreaMonitor()
         {
