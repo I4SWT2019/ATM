@@ -37,5 +37,16 @@ namespace ATM.Test.Unit
             _uut.HandleData("BCD123;10005;85890;12000;20151006213456789");
             Assert.That(_receivedEventArgs, Is.Not.Null);
         }
+
+        [Test]
+        public void HandleData_DataIsHandled_CorrectNewDataReceived()
+        {
+            _uut.HandleData("BCD123;10005;85890;12000;20151006213456789");
+            Assert.That(_receivedEventArgs.Plane._tag, Is.EqualTo("BCD123"));
+            Assert.That(_receivedEventArgs.Plane._longitude, Is.EqualTo("10005"));
+            Assert.That(_receivedEventArgs.Plane._latitude, Is.EqualTo("85890"));
+            Assert.That(_receivedEventArgs.Plane._altitude, Is.EqualTo("12000"));
+            Assert.That(_receivedEventArgs.Plane._timestamp, Is.EqualTo("20151006213456789"));
+        }
     }
 }
