@@ -28,9 +28,9 @@ namespace ATM.Test.Unit
             _velocityCalculator = Substitute.For<ICalculator>();
             _headingCalculator = Substitute.For<ICalculator>();
             _areaPrinter = Substitute.For<IPrinter>();
-            _plane1 = Substitute.For<Plane>();
-            _plane2 = Substitute.For<Plane>();
-            _plane3 = Substitute.For<Plane>();
+            _plane1 = new Plane();
+            _plane2 = new Plane();
+            _plane3 = new Plane();
 
             _uut = new ATM(_areaPrinter, _velocityCalculator, _headingCalculator);
         }
@@ -253,6 +253,24 @@ namespace ATM.Test.Unit
                 Arg.Is<int[]>(x => p3.SequenceEqual(x)),
                 Arg.Is<int[]>(x => p1.SequenceEqual(x))
                 );
+        }
+
+        [Test]
+        public void RunPlaneUpdate_TwoPlanesInList()
+        {
+            // Arrange
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1,
+                _plane2
+            };
+
+            // Act
+            _uut.Update(planes);
+            _uut.Update(planes);
+
+            //Assert
+            _areaPrinter.ReceivedWithAnyArgs(1).Print(default);
         }
 
        
