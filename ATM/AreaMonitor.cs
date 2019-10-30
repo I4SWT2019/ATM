@@ -14,11 +14,7 @@ namespace ATM
 
         public AreaMonitor()
         {
-            // Sub to event
-            /*
-            _dataHandler.PlanesReady += new EventHandler(_dataHandler_PlanesReady);
-            _dataHandler.HandleReceivedData();
-            */
+            _planesInArea = _dataHandler._eventPlaneList;
         }
 
         public void HandleReceivedData()

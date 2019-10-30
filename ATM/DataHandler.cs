@@ -10,38 +10,32 @@ namespace ATM
 {
     public /*sealed*/ class DataHandler
     {
+
         public /*private*/ DataHandler()
         {
 
         }
-                /*
 
-        private static DataHandler instance = null;
-
-        public static DataHandler instance
+        public enum MyEvent
         {
-            get
-            {
-                if(instance ==null)
-                {
-                    instance = new DataHandler();
-                }
-                return instance;
-            }
-
+             
         }
-        */
-        public event EventHandler PlanesReady;
 
-        public void FormattedDataReady()
-        {
+        //private static DataHandler instance = null;
+
+        public delegate void MyEventHandler(MyEvent e);
+
+        public event EventHandler<MyEventHandler> EventTriggered;
+
+        //public void FormattedDataReady()
+        /*{
             if (PlanesReady != null)
                 PlanesReady(this, EventArgs.Empty);
             Console.WriteLine("Formatted Data ready");
-        }
+        }*/
 
         public List<Plane> _planes = new List<Plane>();
-
+        public List<Plane> _eventPlaneList = new List<Plane>();
         // Subscribe/Receive event with RawData from Transponder
         public void ReceivedData(object sender, RawTransponderDataEventArgs e)
         {
@@ -64,7 +58,15 @@ namespace ATM
 
             _planes.Add(thisPlane);
 
-            FormattedDataReady();
+            OnPlaneListUpdateEvent(new MyEventHandler(delegate(MyEvent eMyEvent)
+            {
+                _eventPlaneList = _planes;
+            }));
+        }
+
+        public virtual void OnPlaneListUpdateEvent(MyEventHandler e)
+        {
+            EventTriggered?.Invoke(this, e);
         }
     }
 }
