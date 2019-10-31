@@ -8,7 +8,7 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    class AreaMonitor : ISubject
+    public class AreaMonitor : ISubject
     {
         public List<Plane> _planesInArea = new List<Plane>();
 
