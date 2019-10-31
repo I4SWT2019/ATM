@@ -31,6 +31,8 @@ namespace ATM.Calculators
 
             //Here to velocity is calculated as distance over time, but because the time scale is 10^-3 seconds
             //is must be converted to seconds by dividing w. 1,000
+            if (totalTime == 0)
+                return 0;
             Velocity = (travelDistance / (totalTime / 1000)); // m/s
 
             return Velocity;

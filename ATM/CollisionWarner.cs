@@ -33,6 +33,7 @@ namespace ATM
         {
             if(planes!=null)
             { 
+                planes.Sort();
                 double deltaX, deltaY, deltaZ, distance;
 
                 // Runs through List of planes with index i, and compare to planes with index j

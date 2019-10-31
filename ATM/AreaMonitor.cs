@@ -31,26 +31,35 @@ namespace ATM
             else UpdateArea(e.Plane, NOT_IN_AREA);
         }
 
-        public void UpdateArea(Plane _plane, bool PlaneInArea)
+        public void UpdateArea(Plane plane, bool PlaneInArea)
         {
-            Plane planeInList = _planesInArea.Find(i => i._tag == _plane._tag);
-            if (planeInList._tag == _plane._tag)
-            {
-                _planesInArea.Remove(planeInList);
+            Plane planeInList = _planesInArea.Find(i => i._tag == plane._tag);
 
+            if (planeInList == null)
+            {
                 if (PlaneInArea)
                 {
-                    _planesInArea.Add(_plane);
+                    _planesInArea.Add(plane);
+                    Notify();
+                }
+            }
+            else if (planeInList._tag == plane._tag)
+            {
+                _planesInArea.Remove(planeInList);
+                if (PlaneInArea)
+                {
+                    _planesInArea.Add(plane);
                     Notify();
                 }
             }
             else
             {
-                if (PlaneInArea)
+                if(PlaneInArea)
                 {
-                    _planesInArea.Add(_plane);
+                    _planesInArea.Add(plane);
                     Notify();
                 }
+                
             }
         }
 

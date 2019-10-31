@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ATM\ATM.csproj" />
+    <ProjectReference Include="..\TransponderReceiverUser\TransponderReceiverUser.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="TransponderReceiver">
+      <HintPath>..\TransponderReceiver.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
