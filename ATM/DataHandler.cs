@@ -42,9 +42,6 @@ namespace ATM
             Plane _Plane = new Plane();
 
             tempString = data + ";";
-
-            Console.WriteLine("Original string: " + tempString);
-
             do
             {
                 position = tempString.IndexOf(';', start);
