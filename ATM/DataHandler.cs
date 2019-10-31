@@ -22,11 +22,6 @@ namespace ATM
             _receiver.TransponderDataReady += ReceivedData;
         }
 
-        public DataHandler()
-        {
-
-        }
-
         public void ReceivedData(object sender, RawTransponderDataEventArgs e)
         {
             foreach (var data in e.TransponderData)

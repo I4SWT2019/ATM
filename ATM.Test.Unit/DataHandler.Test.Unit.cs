@@ -17,19 +17,25 @@ namespace ATM.Test.Unit
     {
         private DataHandler _uut;
         private PlaneAddedEventArgs _receivedEventArgs;
+        private ITransponderReceiver _fakeTransponderReceiver;
+        private int EventCount;
 
         [SetUp]
         public void Setup()
         {
+            _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
+
+            _uut = new DataHandler(_fakeTransponderReceiver);
             _receivedEventArgs = null;
+            EventCount = 0;
 
-            _uut = new DataHandler();
+
             _uut.HandleData("XYZ987;25059;75654;4000;20151006213456789");
-
             _uut.PlaneAddedEvent +=
                 (o, args) =>
                 {
                     _receivedEventArgs = args;
+                    EventCount++;
                 };
         }
 
@@ -49,7 +55,15 @@ namespace ATM.Test.Unit
             Assert.That(_receivedEventArgs.Plane._longitude, Is.EqualTo(85890));
             Assert.That(_receivedEventArgs.Plane._altitude, Is.EqualTo(12000));
             Assert.That(_receivedEventArgs.Plane._timestamp, Is.EqualTo("20151006213456789"));
-            
+        }
+
+        [Test]
+        public void HandleData_DataIsHandled_TwoEventsFired()
+        {
+            _uut.HandleData("ABC123;10005;85890;12000;20151006213456789");
+            _uut.HandleData("CDE456;10005;85890;12000;20151006213456789");
+
+            Assert.That(EventCount, Is.EqualTo(2));
         }
     }
 }
