@@ -33,19 +33,46 @@ namespace ATM
                 HandleData(data);
             }
         }
-
         public void HandleData(string data)
         {
-            Plane thisPlane = new Plane();
+            string tempString;
+            var dataStrings = new List<string>();
+            int position = 0;
+            int start = 0;
+            Plane _Plane = new Plane();
 
-            thisPlane.setAll(thisPlane,
-                data.Substring(0, 6),
-                int.Parse(data.Substring(8, 5)),
-                int.Parse(data.Substring(13, 5)),
-                int.Parse(data.Substring(20, 5)),
-                data.Substring(27, 17));
+            tempString = data + ";";
 
-            OnPlaneListUpdateEvent(new PlaneAddedEventArgs { Plane = thisPlane });
+            Console.WriteLine("Original string: " + tempString);
+
+            do
+            {
+                position = tempString.IndexOf(';', start);
+                if (position >= 0)
+                {
+                    dataStrings.Add(tempString.Substring(start, position - start + 1).Trim());
+                    start = position + 1;
+                }
+            } while (position > 0);
+
+            if (dataStrings.Count == 5)
+            {
+                string tag = dataStrings[0];
+                string latitude = dataStrings[1];
+                string longitude = dataStrings[2];
+                string altitude = dataStrings[3];
+                string timestamp = dataStrings[4];
+                
+                tag = tag.Remove(tag.Length - 1);
+                latitude = latitude.Remove(latitude.Length - 1);
+                longitude = longitude.Remove(longitude.Length - 1);
+                altitude = altitude.Remove(altitude.Length - 1);
+                timestamp = timestamp.Remove(timestamp.Length - 1);
+
+
+                _Plane.setAll(_Plane, tag, int.Parse(latitude), int.Parse(longitude), int.Parse(altitude), timestamp);
+            }
+
         }
 
         protected virtual void OnPlaneListUpdateEvent(PlaneAddedEventArgs e)
