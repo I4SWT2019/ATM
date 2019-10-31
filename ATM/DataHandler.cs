@@ -35,19 +35,18 @@ namespace ATM
         }
         public void HandleData(string data)
         {
-            string tempString;
             var dataStrings = new List<string>();
             int position = 0;
             int start = 0;
             Plane _Plane = new Plane();
 
-            tempString = data + ";";
+            data = data + ";";
             do
             {
-                position = tempString.IndexOf(';', start);
+                position = data.IndexOf(';', start);
                 if (position >= 0)
                 {
-                    dataStrings.Add(tempString.Substring(start, position - start + 1).Trim());
+                    dataStrings.Add(data.Substring(start, position - start + 1).Trim());
                     start = position + 1;
                 }
             } while (position > 0);
