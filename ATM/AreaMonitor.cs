@@ -8,7 +8,7 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    class AreaMonitor : ISubject
+    public class AreaMonitor : ISubject
     {
         public List<Plane> _planesInArea = new List<Plane>();
 
@@ -33,6 +33,9 @@ namespace ATM
 
         public void UpdateArea(Plane _plane, bool PlaneInArea)
         {
+            _planesInArea.Add(_plane);
+            Notify();
+            /*
             bool NeedToNotify = false;
             Plane planeInList = _planesInArea.Find(i => i._tag == _plane._tag);
 
@@ -43,9 +46,18 @@ namespace ATM
                     _planesInArea.Add(_plane);
                 NeedToNotify = true;
             }
+            else
+            {
+                if (PlaneInArea)
+                {
+                    _planesInArea.Add(_plane);
+                    NeedToNotify = true;
+                }
+            }
 
             if (NeedToNotify)
                 Notify();
+                */
         }
 
         /* 

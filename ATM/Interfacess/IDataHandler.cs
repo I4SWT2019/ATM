@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM.Interfacess
 {
-    interface IDataHandler
+    public interface IDataHandler
     {
         event EventHandler<PlaneAddedEventArgs> PlaneAddedEvent;
     }
