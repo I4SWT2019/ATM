@@ -17,13 +17,14 @@ namespace ATM.Test.Unit
     {
         private DataHandler _uut;
         private PlaneAddedEventArgs _receivedEventArgs;
+        private ITransponderReceiver _transponderReceiver;
 
         [SetUp]
         public void Setup()
         {
             _receivedEventArgs = null;
 
-            _uut = new DataHandler();
+            _uut = new DataHandler(_transponderReceiver);
             _uut.HandleData("XYZ987;25059;75654;4000;20151006213456789");
 
             _uut.PlaneAddedEvent +=

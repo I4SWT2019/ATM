@@ -20,7 +20,8 @@ namespace ATM
             _receiver = receiver;
 
             _receiver.TransponderDataReady += ReceivedData;
-        }       
+        }
+
         public DataHandler()
         {
 
