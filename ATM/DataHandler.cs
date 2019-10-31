@@ -11,10 +11,7 @@ namespace ATM
     public class DataHandler
     {
 
-        public /*private*/ DataHandler()
-        {
-
-        }
+        public /*private*/ DataHandler() {}
 
         public enum MyEvent
         {
