@@ -15,6 +15,8 @@ namespace ATM
 
         public event EventHandler<PlaneAddedEventArgs> PlaneAddedEvent;
 
+        public bool EventFromTransponderReceived = false;
+
         public DataHandler(ITransponderReceiver receiver)
         {
             _receiver = receiver;
@@ -24,6 +26,7 @@ namespace ATM
 
         public void ReceivedData(object sender, RawTransponderDataEventArgs e)
         {
+            EventFromTransponderReceived = true;
             foreach (var data in e.TransponderData)
             {
                 HandleData(data);
