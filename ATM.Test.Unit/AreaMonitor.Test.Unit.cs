@@ -15,11 +15,15 @@ namespace ATM.Test.Unit
     public class AreaMonitorUnitTest
     {
         private AreaMonitor _uut;
+        private DataHandler _dataHandler;
 
         [SetUp]
         public void SetUp()
         {
-
+			_uut = new AreaMonitor(_dataHandler);
         }
+
+		[Test]
+
     }
 }

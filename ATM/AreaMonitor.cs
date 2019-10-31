@@ -34,7 +34,7 @@ namespace ATM
         public void UpdateArea(Plane _plane, bool PlaneInArea)
         {
             Plane planeInList = _planesInArea.Find(i => i._tag == _plane._tag);
-            if (planeInList == _plane)
+            if (planeInList._tag == _plane._tag)
             {
                 _planesInArea.Remove(planeInList);
 
