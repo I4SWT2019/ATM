@@ -4,42 +4,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM.Interfacess;
+using TransponderReceiver;
 
 namespace ATM
 {
-    class AreaMonitor : DataHandler, ISubject
+    class AreaMonitor : ISubject
     {
         public List<Plane> _planesInArea = new List<Plane>();
 
-        public List<Plane> _planesFromDataHandler = new List<Plane>();
-
         private List<IObserver> _observers = new List<IObserver>();
-        private DataHandler _dataHandler = new DataHandler();
 
-        public AreaMonitor()
+        public AreaMonitor(DataHandler _dataHandler)
         {
-            _planesInArea = _dataHandler._eventPlaneList;
+            _dataHandler.PlaneAddedEvent += HandleReceivedData;
         }
 
-        public void HandleReceivedData()
+        public void HandleReceivedData(object sender, PlaneAddedEventArgs e)
         {
-            // Get the first element in the list
-            Plane FirstPLane = _planes.First();
+            bool IN_AREA = true;
+            bool NOT_IN_AREA = false;
 
             // Check if planes in List are in monitoring area
-            if (((90000 > FirstPLane._latitude) && (FirstPLane._latitude > 10000)) &&
-                ((90000 > FirstPLane._longitude) && (FirstPLane._longitude > 10000)))
-                UpdateArea(FirstPLane);
-
-            // Remove the handled element from _plans list
-            _planes.Remove(FirstPLane);
-
+            if (((90000 > e.Plane._latitude) && (e.Plane._latitude > 10000)) &&
+                ((90000 > e.Plane._longitude) && (e.Plane._longitude > 10000)))
+                UpdateArea(e.Plane, IN_AREA);
+            else UpdateArea(e.Plane, NOT_IN_AREA);
         }
 
-        public void UpdateArea(Plane _plane)
+        public void UpdateArea(Plane _plane, bool PlaneInArea)
         {
-            _planesInArea.Add(_plane);
-            Notify();
+            bool NeedToNotify = false;
+            Plane planeInList = _planesInArea.Find(i => i._tag == _plane._tag);
+
+            if (planeInList!= null)
+            {
+                _planesInArea.Remove(planeInList);
+                if (PlaneInArea)
+                    _planesInArea.Add(_plane);
+                NeedToNotify = true;
+            }
+
+            if (NeedToNotify)
+                Notify();
         }
 
         /* 

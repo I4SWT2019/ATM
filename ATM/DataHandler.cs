@@ -4,36 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
+using ATM.Interfacess;
 
 
 namespace ATM
 {
-    public class DataHandler
+    public class DataHandler : IDataHandler
     {
+        private ITransponderReceiver _receiver;
 
-        public /*private*/ DataHandler() {}
+        public event EventHandler<PlaneAddedEventArgs> PlaneAddedEvent;
 
-        public enum MyEvent
+        public DataHandler(ITransponderReceiver receiver)
         {
-             
+            _receiver = receiver;
+
+            _receiver.TransponderDataReady += ReceivedData;
+        }       
+        public DataHandler()
+        {
+
         }
 
-        //private static DataHandler instance = null;
-
-        public delegate void MyEventHandler(MyEvent e);
-
-        public event EventHandler<MyEventHandler> EventTriggered;
-
-        //public void FormattedDataReady()
-        /*{
-            if (PlanesReady != null)
-                PlanesReady(this, EventArgs.Empty);
-            Console.WriteLine("Formatted Data ready");
-        }*/
-
-        public List<Plane> _planes = new List<Plane>();
-        public List<Plane> _eventPlaneList = new List<Plane>();
-        // Subscribe/Receive event with RawData from Transponder
         public void ReceivedData(object sender, RawTransponderDataEventArgs e)
         {
             foreach (var data in e.TransponderData)
@@ -53,17 +45,12 @@ namespace ATM
                 int.Parse(data.Substring(20, 5)),
                 data.Substring(27, 17));
 
-            _planes.Add(thisPlane);
-
-            OnPlaneListUpdateEvent(new MyEventHandler(delegate(MyEvent eMyEvent)
-            {
-                _eventPlaneList = _planes;
-            }));
+            OnPlaneListUpdateEvent(new PlaneAddedEventArgs { Plane = thisPlane });
         }
 
-        public virtual void OnPlaneListUpdateEvent(MyEventHandler e)
+        protected virtual void OnPlaneListUpdateEvent(PlaneAddedEventArgs e)
         {
-            EventTriggered?.Invoke(this, e);
+            PlaneAddedEvent?.Invoke(this, e);
         }
     }
 }
