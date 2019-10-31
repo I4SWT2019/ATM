@@ -31,9 +31,9 @@ namespace ATM
         // Planes must be sorted by altitude
         public void WarningCheck(List<Plane> planes)
         {
-            if(planes!=null)
+            if(planes != null)
             { 
-                planes.Sort();
+                planes.Sort((x,y) => x._altitude.CompareTo(y._altitude));
                 double deltaX, deltaY, deltaZ, distance;
 
                 // Runs through List of planes with index i, and compare to planes with index j

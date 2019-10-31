@@ -11,7 +11,6 @@ namespace ATM.Printers
     {
         public void Print(List<Plane> planes)
         {
-            Console.Clear();
             Console.WriteLine("-----Planes in Monitored Area-----");
             foreach (Plane p in planes)
             {

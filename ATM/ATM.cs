@@ -29,6 +29,11 @@ namespace ATM
             RunPlaneUpdate();
         }
 
+        public void SetOldData(List<Plane> planes)
+        {
+            _previousPlanes = planes;
+        }
+
         public void RunPlaneUpdate()
         {
             if(_planes != null && _previousPlanes != null)
