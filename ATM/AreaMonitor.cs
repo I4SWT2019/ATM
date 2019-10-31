@@ -33,19 +33,11 @@ namespace ATM
 
         public void UpdateArea(Plane _plane, bool PlaneInArea)
         {
-            bool NeedToNotify = false;
-            Plane planeInList = _planesInArea.Find(i => i._tag == _plane._tag);
-
-            if (planeInList!= null)
+            if (PlaneInArea)
             {
-                _planesInArea.Remove(planeInList);
-                if (PlaneInArea)
-                    _planesInArea.Add(_plane);
-                NeedToNotify = true;
-            }
-
-            if (NeedToNotify)
+                _planesInArea.Add(_plane);
                 Notify();
+            }
         }
 
         /* 
