@@ -57,15 +57,6 @@ namespace ATM
                     Notify();
                 }
             }
-            else
-            {
-                if(PlaneInArea)
-                {
-                    _planesInArea.Add(plane);
-                    Notify();
-                }
-                
-            }
         }
 
         /* 
