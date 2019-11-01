@@ -21,7 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverApplicat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TransponderReceiver", "TransponderReceiver", "{E0339B3D-F896-4BD4-84A7-B5E19E8D3A1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM.APP.2.2", "ATM.APP.2.2\ATM.APP.2.2.csproj", "{F8131604-C249-4D1C-9606-0F99913655EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATM.APP.2.2", "ATM.APP.2.2\ATM.APP.2.2.csproj", "{F8131604-C249-4D1C-9606-0F99913655EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM.APP", "ATM.APP\ATM.APP.csproj", "{648737B1-5C59-4E0F-809A-249B863704A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{F8131604-C249-4D1C-9606-0F99913655EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8131604-C249-4D1C-9606-0F99913655EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8131604-C249-4D1C-9606-0F99913655EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{648737B1-5C59-4E0F-809A-249B863704A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{648737B1-5C59-4E0F-809A-249B863704A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{648737B1-5C59-4E0F-809A-249B863704A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{648737B1-5C59-4E0F-809A-249B863704A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

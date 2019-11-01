@@ -24,9 +24,23 @@ namespace ATM
         }
         public void Update(List<Plane> planes)
         {
-            _previousPlanes = _planes;
-            _planes = planes;
-            RunPlaneUpdate();
+            _planes = new List<Plane>();
+            _previousPlanes = new List<Plane>();
+            if (_planes == null)
+            {
+                //_previousPlanes = planes;
+                _planes = planes;
+                Console.WriteLine("_planes == null");
+                Print();
+            }
+            else
+            {
+                Console.WriteLine("_planes && _pre");
+                _previousPlanes = _planes;
+                _planes = planes;
+                RunPlaneUpdate();
+            }
+
         }
 
         public void RunPlaneUpdate()
