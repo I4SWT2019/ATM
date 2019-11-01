@@ -106,5 +106,26 @@ namespace ATM.Test.Unit
             Assert.That(result, Is.EqualTo(0.00));
 
         }
+        public void Calculate_ReceiveTwoDataPointsTimeNotChanged_returnZero()
+        {
+            //Division by zero, avoid system crash
+            //Arrange
+            int[] oldData = new int[]
+                { 0001, 0001, 00000};
+
+            int[] newData = new int[]
+                { 0001, 0002, 00000};
+
+            double result = 0;
+            //Act
+
+            result = uut.Calculate(oldData, newData);
+
+            //Assert
+
+            Assert.That(result, Is.EqualTo(0.00));
+
+        }
+
     }
 }
