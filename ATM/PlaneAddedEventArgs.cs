@@ -9,5 +9,10 @@ namespace ATM
     public class PlaneAddedEventArgs : EventArgs
     {
         public Plane Plane { get; set; }
+
+        public PlaneAddedEventArgs(Plane Plane)
+        {
+            this.Plane = Plane;
+        }
     }
 }

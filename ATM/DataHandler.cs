@@ -67,7 +67,7 @@ namespace ATM
 
                 _Plane.setAll(_Plane, tag, int.Parse(latitude), int.Parse(longitude), int.Parse(altitude), timestamp);
             }
-            OnPlaneListUpdateEvent(new PlaneAddedEventArgs { Plane = _Plane });
+            OnPlaneListUpdateEvent(new PlaneAddedEventArgs(_Plane)); // was PlaneAddedEventArgs {Plane = _Plane}
 
         }
 

@@ -12,9 +12,10 @@ namespace ATM
     {
         public List<Plane> _planesInArea = new List<Plane>();
 
-        private List<IObserver> _observers = new List<IObserver>();
+        public List<IObserver> _observers = new List<IObserver>();
 
         public bool EventFromDataHandlerReceived = false;
+
 
         public AreaMonitor(IDataHandler _dataHandler)
         {
