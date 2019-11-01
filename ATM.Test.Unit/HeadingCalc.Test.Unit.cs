@@ -11,7 +11,9 @@ using NUnit.Framework.Internal;
 
 namespace ATM.Test.Unit
 {
+    
     [TestFixture]
+    [Author("I4SWT2019Gr2")]
     public class HeadingCalcTestUnit
     {
 
@@ -65,7 +67,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        public void Calculate_ReceivedDataPoints_ReturnNegativeAngle()
+        public void Calculate_ReceivedDataPoints_ReturnBigAngleValue()
         {
 
             //Arrange
@@ -86,7 +88,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        public void Calculate_ReceivedDataPoints_ReturnBiggerAngle()
+        public void Calculate_ReceivedDataPoints_ReturnBiggerAngleValue()
         {
 
             //Arrange
@@ -104,6 +106,27 @@ namespace ATM.Test.Unit
             //Assert
 
             Assert.That(Heading, Is.EqualTo(315.00));
+        }
+
+        [Test]
+        public void Calculate_ReceivedDataPoints_ReturnZeroAgain()
+        {
+
+            //Arrange
+            int[] oldData = new int[]
+                {0000, 0000};
+            // x     y
+            int[] newData = new int[]
+                {0001, 0000};
+
+            double Heading = 0;
+            //Act
+
+            Heading = uut.Calculate(oldData, newData);
+
+            //Assert
+
+            Assert.That(Heading, Is.EqualTo(0.00));
         }
     }
 }
