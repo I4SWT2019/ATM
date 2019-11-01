@@ -72,6 +72,16 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        public void UpdateArea_PlaneNotInArea_NotAddedToList()
+        {
+            _plane1.setAll(_plane1, "ABC123", 8005, 85890, 12000, "20151006213456789");
+
+            _uut.UpdateArea(_plane1, false);
+
+            Assert.That(_uut._planesInArea.Count(), Is.EqualTo(0));
+        }
+
+        [Test]
         public void HandleReceivedData_ReceptionWorkingWithTransponder()
         {
             _plane1.setAll(_plane1, "ABC123",10005,85890,12000,"20151006213456789");
