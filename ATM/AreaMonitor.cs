@@ -14,13 +14,17 @@ namespace ATM
 
         private List<IObserver> _observers = new List<IObserver>();
 
-        public AreaMonitor(DataHandler _dataHandler)
+        public bool EventFromDataHandlerReceived = false;
+
+        public AreaMonitor(IDataHandler _dataHandler)
         {
             _dataHandler.PlaneAddedEvent += HandleReceivedData;
         }
 
         public void HandleReceivedData(object sender, PlaneAddedEventArgs e)
         {
+            EventFromDataHandlerReceived = true;
+
             bool IN_AREA = true;
             bool NOT_IN_AREA = false;
 
