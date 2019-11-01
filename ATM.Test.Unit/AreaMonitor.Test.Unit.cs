@@ -34,6 +34,8 @@ namespace ATM.Test.Unit
         {
             _fakeDataHandler = Substitute.For<IDataHandler>();
             _fakeObserver = Substitute.For<IObserver>();
+            _fakeObserver1 = Substitute.For<IObserver>();
+
             _receivedPlaneEventArgs = null;
             _planeEventCount = 0;
 
@@ -98,6 +100,17 @@ namespace ATM.Test.Unit
             _uut.HandleReceivedData(this, new PlaneAddedEventArgs(_plane2));
 
             Assert.That(_uut.EventFromDataHandlerReceived, Is.True);
+        }
+
+        [Test]
+        public void Notify_MultipleObserversInListOfObserversNotified()
+        {
+            _uut.Attach(_fakeObserver);
+            _uut.Attach(_fakeObserver1);
+
+            _uut.Notify();
+
+            Assert.That(_uut.UpdateCount, Is.EqualTo(2));
         }
     }
 }

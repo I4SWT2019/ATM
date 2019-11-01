@@ -16,6 +16,8 @@ namespace ATM
 
         public bool EventFromDataHandlerReceived = false;
 
+        public int UpdateCount;
+
 
         public AreaMonitor(IDataHandler _dataHandler)
         {
@@ -64,9 +66,11 @@ namespace ATM
         */
         public void Notify()
         {
+            UpdateCount = 0;
             foreach (var observer in _observers)
             {
                 observer.Update(_planesInArea);
+                UpdateCount++;
             }
 
         }
