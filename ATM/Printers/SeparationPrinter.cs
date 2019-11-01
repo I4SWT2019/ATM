@@ -12,7 +12,7 @@ namespace ATM.Printers
         public void Print(List<Plane> planes)
         {
             Console.WriteLine("!!! Separation Warning !!!");
-            Console.WriteLine($"Plane {planes[0]._tag} and {planes[1]} are too close");
+            Console.WriteLine($"Plane {planes[0]._tag} and {planes[1]._tag} are too close");
         }
     }
 }
