@@ -33,7 +33,14 @@ namespace ATM.Calculators
             //is must be converted to seconds by dividing w. 1,000
             if (totalTime == 0)
                 return 0;
-            Velocity = (travelDistance / (totalTime / 1000)); // m/s
+            if (travelDistance != 0 && totalTime != 0)
+            {
+                Velocity = (travelDistance / (totalTime / 1000)); // m/s
+            }
+            else
+            {
+                return 0;
+            }
 
             return Velocity;
         }

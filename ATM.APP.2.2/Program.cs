@@ -1,8 +1,11 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using ATM.Calculators;
 using ATM.Printers;
+using TransponderReceiver;
+using TransponderReceiverUser;
 
-namespace ATM.Application
+namespace ATM.APP._2._2
 {
     public class Program
     {
@@ -20,6 +23,7 @@ namespace ATM.Application
 
             areaMonitorReceiver.Attach(airTrafficMonitor);
             areaMonitorReceiver.Attach(separationWarningSystem);
+
             while (true)
             {
                 Thread.Sleep(1000);
