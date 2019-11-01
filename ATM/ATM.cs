@@ -29,6 +29,11 @@ namespace ATM
             RunPlaneUpdate();
         }
 
+        public void SetOldData(List<Plane> planes)
+        {
+            _previousPlanes = planes;
+        }
+
         public void RunPlaneUpdate()
         {
             if(_planes != null && _previousPlanes != null)
@@ -73,7 +78,7 @@ namespace ATM
                 if (p._timestamp != null)
                 {
                     current[2] = Int32.Parse(p._timestamp.Substring(12, 5));
-                    p._velocity = Convert.ToInt32(_velocityCalc.Calculate(previous, current));
+                    p._velocity = Convert.ToInt32(Math.Round(_velocityCalc.Calculate(previous, current)));
                 }
             }
         }

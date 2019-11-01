@@ -8,19 +8,24 @@ using TransponderReceiver;
 
 namespace ATM
 {
-    class AreaMonitor : ISubject
+    public class AreaMonitor : ISubject
     {
         public List<Plane> _planesInArea = new List<Plane>();
 
-        private List<IObserver> _observers = new List<IObserver>();
+        public List<IObserver> _observers = new List<IObserver>();
 
-        public AreaMonitor(DataHandler _dataHandler)
+        public bool EventFromDataHandlerReceived = false;
+
+
+        public AreaMonitor(IDataHandler _dataHandler)
         {
             _dataHandler.PlaneAddedEvent += HandleReceivedData;
         }
 
         public void HandleReceivedData(object sender, PlaneAddedEventArgs e)
         {
+            EventFromDataHandlerReceived = true;
+
             bool IN_AREA = true;
             bool NOT_IN_AREA = false;
 
@@ -31,21 +36,36 @@ namespace ATM
             else UpdateArea(e.Plane, NOT_IN_AREA);
         }
 
-        public void UpdateArea(Plane _plane, bool PlaneInArea)
+        public void UpdateArea(Plane plane, bool PlaneInArea)
         {
-            bool NeedToNotify = false;
-            Plane planeInList = _planesInArea.Find(i => i._tag == _plane._tag);
+            Plane planeInList = _planesInArea.Find(i => i._tag == plane._tag);
 
-            if (planeInList!= null)
+            if (planeInList == null)
+            {
+                if (PlaneInArea)
+                {
+                    _planesInArea.Add(plane);
+                    Notify();
+                }
+            }
+            else if (planeInList._tag == plane._tag)
             {
                 _planesInArea.Remove(planeInList);
                 if (PlaneInArea)
-                    _planesInArea.Add(_plane);
-                NeedToNotify = true;
+                {
+                    _planesInArea.Add(plane);
+                    Notify();
+                }
             }
-
-            if (NeedToNotify)
-                Notify();
+            else
+            {
+                if(PlaneInArea)
+                {
+                    _planesInArea.Add(plane);
+                    Notify();
+                }
+                
+            }
         }
 
         /* 
