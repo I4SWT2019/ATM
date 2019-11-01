@@ -270,6 +270,5 @@ namespace ATM.Test.Unit
             _areaPrinter.ReceivedWithAnyArgs(1).Print(default);
         }
 
-       
     }
 }
