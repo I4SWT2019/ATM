@@ -65,11 +65,14 @@ namespace ATM.Test.Unit
         public void HandleData_DataIsHandled_CorrectNewDataReceived()
         {
             _uut.HandleData("BCD123;10005;85890;12000;20151006213456789");
-            Assert.That(_receivedPlaneEventArgs.Plane._tag, Is.EqualTo("BCD123"));
-            Assert.That(_receivedPlaneEventArgs.Plane._latitude, Is.EqualTo(10005));
-            Assert.That(_receivedPlaneEventArgs.Plane._longitude, Is.EqualTo(85890));
-            Assert.That(_receivedPlaneEventArgs.Plane._altitude, Is.EqualTo(12000));
-            Assert.That(_receivedPlaneEventArgs.Plane._timestamp, Is.EqualTo("20151006213456789"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(_receivedPlaneEventArgs.Plane._tag, Is.EqualTo("BCD123"));
+                Assert.That(_receivedPlaneEventArgs.Plane._latitude, Is.EqualTo(10005));
+                Assert.That(_receivedPlaneEventArgs.Plane._longitude, Is.EqualTo(85890));
+                Assert.That(_receivedPlaneEventArgs.Plane._altitude, Is.EqualTo(12000));
+                Assert.That(_receivedPlaneEventArgs.Plane._timestamp, Is.EqualTo("20151006213456789"));
+            });
         }
 
         [Test]

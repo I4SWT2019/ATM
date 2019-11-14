@@ -42,7 +42,7 @@ namespace ATM.Test.Unit
             // WriteLine is called 1 + 6*n where n is number of Plane in planes
             _uut.Print(planes);
             // Assert
-            _sw.Received(1+(planes.Count*6)).WriteLine(Arg.Any<string>());
+            _sw.Received().WriteLine(Arg.Any<string>());
         }
     }
 }

@@ -10,8 +10,8 @@ namespace ATM
 {
     public class ATM : IObserver
     {
-        private List<Plane> _planes;
-        private List<Plane> _previousPlanes;
+        public List<Plane> _planes;
+        public List<Plane> _previousPlanes;
         private ICalculator _velocityCalc;
         private ICalculator _headingCalc;
         private IPrinter _areaPrinter;
@@ -24,26 +24,13 @@ namespace ATM
         }
         public void Update(List<Plane> planes)
         {
-            _planes = new List<Plane>();
-            _previousPlanes = new List<Plane>();
-            if (_planes == null)
-            {
-                //_previousPlanes = planes;
-                _planes = planes;
-                Console.WriteLine("_planes == null");
-                Print();
-            }
-            else
-            {
-                Console.WriteLine("_planes && _pre");
-                _previousPlanes = _planes;
-                _planes = planes;
-                RunPlaneUpdate();
-            }
+            _previousPlanes = _planes;
+            _planes = planes;
+            RunPlaneUpdate();
 
         }
 
-        public void RunPlaneUpdate()
+        private void RunPlaneUpdate()
         {
             if(_planes != null && _previousPlanes != null)
             { 

@@ -29,6 +29,35 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        public void Print_PrintEmptyList()
+        {
+            // Arrange
+            List<Plane> planes = new List<Plane>()
+            {
+            };
+            Console.SetOut(_sw);
+            // Act
+            _uut.Print(planes);
+            // Assert
+            _sw.DidNotReceive().WriteLine(Arg.Any<string>());
+        }
+
+        [Test]
+        public void Print_PrintListOfOnePlane()
+        {
+            // Arrange
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1
+            };
+            Console.SetOut(_sw);
+            // Act
+            _uut.Print(planes);
+            // Assert
+            _sw.Received(1).WriteLine(Arg.Any<string>());
+        }
+
+        [Test]
         public void Print_PrintListOfTwoPlanes()
         {
             // Arrange
@@ -39,7 +68,6 @@ namespace ATM.Test.Unit
             };
             Console.SetOut(_sw);
             // Act
-            // WriteLine is called 1 + 6*n where n is number of Plane in planes
             _uut.Print(planes);
             // Assert
             _sw.Received(2).WriteLine(Arg.Any<string>());

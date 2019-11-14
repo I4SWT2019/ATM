@@ -62,14 +62,13 @@ namespace ATM.Test.Unit
 
             // Act
             _uut.Update(planes);
-            _uut.Print();
             _uut.Update(newPlanes);
 
             // Assert
-            Received.InOrder(() =>
+            Assert.Multiple(() =>
             {
-                _areaPrinter.Print(planes);
-                _areaPrinter.Print(newPlanes);
+                Assert.That(planes, Is.EqualTo(_uut._previousPlanes));
+                Assert.That(newPlanes, Is.EqualTo(_uut._planes));
             });
         }
 
@@ -96,10 +95,10 @@ namespace ATM.Test.Unit
                 _plane2,
                 _plane3
             };
+            _uut._planes = planes;
+            _uut._previousPlanes = previousPlanes;
 
             // Act
-            _uut.Update(previousPlanes);
-            _uut.Update(planes);
             _uut.CalcVelocity();
 
             // Assert
@@ -118,10 +117,10 @@ namespace ATM.Test.Unit
             List<Plane> planes = new List<Plane>()
             {
             };
+            _uut._planes = planes;
+            _uut._previousPlanes = previousPlanes;
 
             // Act
-            _uut.Update(previousPlanes);
-            _uut.Update(planes);
             _uut.CalcVelocity();
 
             // Assert
@@ -153,10 +152,10 @@ namespace ATM.Test.Unit
             {
                 _plane1
             };
-
+            _uut._planes = planes;
+            _uut._previousPlanes = previousPlanes;
             // Act
-            _uut.Update(previousPlanes);
-            _uut.Update(planes);
+            _uut.CalcVelocity();
 
             // Assert
             _velocityCalculator.Received(1).Calculate(
@@ -188,8 +187,8 @@ namespace ATM.Test.Unit
             List<Plane> planes = new List<Plane>()
             {
             };
-            _uut.Update(previousPlanes);
-            _uut.Update(planes);
+            _uut._planes = planes;
+            _uut._previousPlanes = previousPlanes;
             // Act
             _uut.CalcHeading();
 
@@ -209,10 +208,9 @@ namespace ATM.Test.Unit
                 _plane2,
                 _plane3
             };
-
+            _uut._planes = planes;
+            _uut._previousPlanes = previousPlanes;
             // Act
-            _uut.Update(previousPlanes);
-            _uut.Update(planes);
             _uut.CalcHeading();
 
             // Assert
@@ -240,10 +238,10 @@ namespace ATM.Test.Unit
             {
                 _plane1
             };
-
+            _uut._planes = planes;
+            _uut._previousPlanes = previousPlanes;
             // Act
-            _uut.Update(previousPlanes);
-            _uut.Update(planes);
+            _uut.CalcHeading();
 
             // Assert
             _headingCalculator.Received(1).Calculate(
@@ -251,24 +249,5 @@ namespace ATM.Test.Unit
                 Arg.Is<int[]>(x => p1.SequenceEqual(x))
                 );
         }
-
-        [Test]
-        public void RunPlaneUpdate_TwoPlanesInList()
-        {
-            // Arrange
-            List<Plane> planes = new List<Plane>()
-            {
-                _plane1,
-                _plane2
-            };
-
-            // Act
-            _uut.Update(planes);
-            _uut.Update(planes);
-
-            //Assert
-            _areaPrinter.ReceivedWithAnyArgs(1).Print(default);
-        }
-
     }
 }
