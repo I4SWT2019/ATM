@@ -53,7 +53,8 @@ namespace ATM
 
                         // Go to next index if distance is acceptable
                         // AND index i's and j+1's altitude is different
-                        if ((distance >= 5000) && planes[j + 1]._altitude != planes[i]._altitude)
+                        if ((planes.Count < j + 1) && 
+                            (distance >= 5000) && planes[j + 1]._altitude != planes[i]._altitude)
                             break;
                         else
                         {

@@ -72,6 +72,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        // BVA
         public void WarningCheck_AltitudeOkay()
         {
             //Arrange
@@ -89,6 +90,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        // BVA
         public void WarningCheck_AltitudeAndDistanceOkay()
         {
             //Arrange
@@ -110,6 +112,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        // BVA
         public void WarningCheck_AltitudeNotOkayDistanceOkay()
         {
             //Arrange
@@ -131,6 +134,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        // BVA
         public void WarningCheck_AltitudeOkayDistanceNotOkay()
         {
             //Arrange
@@ -152,6 +156,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        // BVA
         public void WarningCheck_AltitudeNotOkayDistanceNotOkay()
         {
             //Arrange
@@ -195,6 +200,7 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        // BVA
         public void WarningCheck_ThirdPlaneWithDifferentAltitude()
         {
             //Arrange
@@ -220,6 +226,7 @@ namespace ATM.Test.Unit
         }
         
         [Test]
+        // BVA
         public void WarningCheck_FirstPlaneWithTwoWarnings()
         {
             //Arrange
