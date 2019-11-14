@@ -54,7 +54,7 @@ namespace ATM.Test.Unit
             // Act
             _uut.Print(planes);
             // Assert
-            _sw.Received(1).WriteLine(Arg.Any<string>());
+            _sw.DidNotReceive().WriteLine(Arg.Any<string>());
         }
 
         [Test]
