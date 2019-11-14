@@ -1,6 +1,8 @@
-﻿using System.Threading;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Threading;
 using ATM.Calculators;
 using ATM.Printers;
+using TransponderReceiver;
 
 namespace ATM.Application
 {
@@ -24,8 +26,6 @@ namespace ATM.Application
             {
                 Thread.Sleep(1000);
             }
-
-            return 0;
         }
     }
 }
