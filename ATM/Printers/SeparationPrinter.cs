@@ -11,7 +11,7 @@ namespace ATM.Printers
     {
         public void Print(List<Plane> planes)
         {
-            if (planes.Count > 0)
+            if (planes.Count > 1)
             {
                 Console.WriteLine("!!! Separation Warning !!!");
                 Console.WriteLine($"Plane {planes[0]._tag} and {planes[1]._tag} are too close");
