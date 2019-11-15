@@ -51,7 +51,7 @@ namespace ATM
                         deltaY = Math.Pow(planes[j]._latitude - planes[i]._latitude, 2);
                         distance = Math.Sqrt(deltaX + deltaY);
 
-                        // Go to next index if distance is acceptable
+                        // Go to next index i if distance is acceptable
                         // AND index i's and j+1's altitude is different
                         if ((planes.Count < j + 1) && 
                             (distance >= 5000) && planes[j + 1]._altitude != planes[i]._altitude)
