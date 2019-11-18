@@ -72,7 +72,6 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        // BVA
         public void WarningCheck_AltitudeOkay()
         {
             //Arrange
@@ -90,7 +89,40 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        // BVA
+        public void WarningCheck_BorderingOnLimit_AltitudeOkay()
+        {
+            //Arrange
+            _plane1._altitude = 1500;
+            _plane2._altitude = 1800;
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1,
+                _plane2
+            };
+            //Act
+            _uut.WarningCheck(planes);
+            //Assert
+            _separationPrinter.DidNotReceive().Print(planes);
+        }
+
+        [Test]
+        public void WarningCheck_AltitudeNotOkay_PrintReceivedCall()
+        {
+            //Arrange
+            _plane1._altitude = 2200;
+            _plane2._altitude = 2250;
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1,
+                _plane2
+            };
+            //Act
+            _uut.WarningCheck(planes);
+            //Assert
+            _separationPrinter.DidNotReceive().Print(planes);
+        }
+
+        [Test]
         public void WarningCheck_AltitudeAndDistanceOkay()
         {
             //Arrange
@@ -99,6 +131,27 @@ namespace ATM.Test.Unit
             _plane1._longitude = 1000;
             _plane2._altitude = 1300;
             _plane2._latitude = 3500;
+            _plane2._longitude = 5500;
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1,
+                _plane2
+            };
+            //Act
+            _uut.WarningCheck(planes);
+            //Assert
+            _separationPrinter.DidNotReceive().Print(planes);
+        }
+
+        [Test]
+        public void WarningCheck_BorderOnAltitudeLimit_AltitudeOkayDistanceNot()
+        {
+            //Arrange
+            _plane1._altitude = 2000;
+            _plane1._latitude = 2300;
+            _plane1._longitude = 2500;
+            _plane2._altitude = 2300;
+            _plane2._latitude = 2300;
             _plane2._longitude = 3500;
             List<Plane> planes = new List<Plane>()
             {
@@ -112,7 +165,6 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        // BVA
         public void WarningCheck_AltitudeNotOkayDistanceOkay()
         {
             //Arrange
@@ -134,16 +186,15 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        // BVA
-        public void WarningCheck_AltitudeOkayDistanceNotOkay()
+        public void WarningCheck_BorderOnDistanceLimit_AltitudeNotOkayDistanceOkay()
         {
             //Arrange
-            _plane1._altitude = 1000;
-            _plane1._latitude = 1000;
-            _plane1._longitude = 1000;
-            _plane2._altitude = 1300;
-            _plane2._latitude = 3499;
-            _plane2._longitude = 3500;
+            _plane1._altitude = 2000;
+            _plane1._latitude = 2300;
+            _plane1._longitude = 2500;
+            _plane2._altitude = 2250;
+            _plane2._latitude = 2300;
+            _plane2._longitude = 7500;
             List<Plane> planes = new List<Plane>()
             {
                 _plane1,
@@ -156,8 +207,49 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        // BVA
-        public void WarningCheck_AltitudeNotOkayDistanceNotOkay()
+        public void WarningCheck_BorderOnDistanceAndAltitudeLimit_AltitudeAndDistanceOkay()
+        {
+            //Arrange
+            _plane1._altitude = 2000;
+            _plane1._latitude = 2300;
+            _plane1._longitude = 2500;
+            _plane2._altitude = 2300;
+            _plane2._latitude = 2300;
+            _plane2._longitude = 7500;
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1,
+                _plane2
+            };
+            //Act
+            _uut.WarningCheck(planes);
+            //Assert
+            _separationPrinter.DidNotReceive().Print(planes);
+        }
+
+        [Test]
+        public void WarningCheck_AltitudeAndDistanceNotOkay()
+        {
+            //Arrange
+            _plane1._altitude = 2000;
+            _plane1._latitude = 2300;
+            _plane1._longitude = 2500;
+            _plane2._altitude = 2299;
+            _plane2._latitude = 2300;
+            _plane2._longitude = 2000;
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1,
+                _plane2
+            };
+            //Act
+            _uut.WarningCheck(planes);
+            //Assert
+            _separationPrinter.Received(1).Print(Arg.Any<List<Plane>>());
+        }
+
+        [Test]
+        public void WarningCheck_BorderOnDistanceAndAltitudeLimit_AltitudeNotOkayDistanceNotOkay()
         {
             //Arrange
             _plane1._altitude = 1000;
@@ -200,7 +292,6 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        // BVA
         public void WarningCheck_ThirdPlaneWithDifferentAltitude()
         {
             //Arrange
@@ -224,7 +315,57 @@ namespace ATM.Test.Unit
             //Assert
             _separationPrinter.DidNotReceive().Print(planes);
         }
-        
+
+        [Test]
+        public void WarningCheck_AllPlanesBorderOnAltitude_AllPlanesDifferentAltitude()
+        {
+            //Arrange
+            _plane1._altitude = 1000;
+            _plane1._latitude = 1000;
+            _plane1._longitude = 1000;
+            _plane2._altitude = 1300;
+            _plane2._latitude = 1000;
+            _plane2._longitude = 1000;
+            _plane3._altitude = 1600;
+            _plane3._latitude = 1000;
+            _plane3._longitude = 1000;
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1,
+                _plane2,
+                _plane3
+            };
+            //Act
+            _uut.Update(planes);
+            //Assert
+            _separationPrinter.DidNotReceive().Print(planes);
+        }
+
+        [Test]
+        public void WarningCheck_AllPlanesBorderOnDistance_AllPlanesSameAltitude()
+        {
+            //Arrange
+            _plane1._altitude = 1000;
+            _plane1._latitude = 1000;
+            _plane1._longitude = 6000;
+            _plane2._altitude = 1000;
+            _plane2._latitude = 1000;
+            _plane2._longitude = 1000;
+            _plane3._altitude = 1000;
+            _plane3._latitude = 1000;
+            _plane3._longitude = 11000;
+            List<Plane> planes = new List<Plane>()
+            {
+                _plane1,
+                _plane2,
+                _plane3
+            };
+            //Act
+            _uut.Update(planes);
+            //Assert
+            _separationPrinter.DidNotReceive().Print(planes);
+        }
+
         [Test]
         // BVA
         public void WarningCheck_FirstPlaneWithTwoWarnings()
