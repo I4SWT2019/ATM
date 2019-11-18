@@ -31,6 +31,17 @@ namespace ATM.Test.Unit
         }
 
         [Test]
+        public void WarningCheck_NoPlanesInList()
+        {
+            //Arrange
+            List<Plane> planes = new List<Plane>();
+            //Act
+            _uut.WarningCheck(planes);
+            //Assert
+            _separationPrinter.DidNotReceiveWithAnyArgs().Print(default);
+        }
+
+        [Test]
         public void Print_OnePlaneInList()
         {
             //Arrange
@@ -60,18 +71,6 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        public void WarningCheck_NoPlanesInList()
-        {
-            //Arrange
-            List<Plane> planes = new List<Plane>();
-            //Act
-            _uut.WarningCheck(planes);
-            //Assert
-            _separationPrinter.DidNotReceiveWithAnyArgs().Print(default);
-
-        }
-
-        [Test]
         public void WarningCheck_AltitudeOkay()
         {
             //Arrange
@@ -88,12 +87,15 @@ namespace ATM.Test.Unit
             _separationPrinter.DidNotReceive().Print(planes);
         }
 
+        [TestCase(1500,1800)]
+        [TestCase(1500,1801)]
+        [TestCase(500,20000)]
         [Test]
-        public void WarningCheck_BorderingOnLimit_AltitudeOkay()
+        public void WarningCheck_AltitudeOkay_NoPrintCall(int altitude1, int altitude2)
         {
             //Arrange
-            _plane1._altitude = 1500;
-            _plane2._altitude = 1800;
+            _plane1._altitude = altitude1;
+            _plane2._altitude = altitude2;
             List<Plane> planes = new List<Plane>()
             {
                 _plane1,
@@ -105,12 +107,15 @@ namespace ATM.Test.Unit
             _separationPrinter.DidNotReceive().Print(planes);
         }
 
+        [TestCase(1500, 1799)]
+        [TestCase(1500,1798)]
+        [TestCase(500,500)]
         [Test]
-        public void WarningCheck_AltitudeNotOkay_PrintReceivedCall()
+        public void WarningCheck_AltitudeNotOkay_PrintReceivedCall(int altitude1, int altitude2)
         {
             //Arrange
-            _plane1._altitude = 2200;
-            _plane2._altitude = 2250;
+            _plane1._altitude = altitude1;
+            _plane2._altitude = altitude2;
             List<Plane> planes = new List<Plane>()
             {
                 _plane1,
@@ -122,8 +127,17 @@ namespace ATM.Test.Unit
             _separationPrinter.DidNotReceive().Print(planes);
         }
 
+        [TestCase(1500, 1800, 2300, 2300, 2500, 7500)]
+        [TestCase(1500, 1800, 2300, 2300, 2500, 7501)]
+        [TestCase(1500, 1800, 2500, 7501, 2300, 2300)]
+        [TestCase(1500, 1800, 2500, 7500, 2300, 2300)]
+        [TestCase(1500, 1800, 10000, 90000, 10000, 90000)]
+        [TestCase(1500, 1800, 90000, 10000, 90000, 10000)]
         [Test]
-        public void WarningCheck_AltitudeAndDistanceOkay()
+        public void WarningCheck_AltitudeAndDistanceOkay_NoPrinterCall(
+            int altitude1, int altitude2,
+            int latitude1, int latitude2,
+            int longitude1, int longitude2)
         {
             //Arrange
             _plane1._altitude = 1000;
@@ -143,16 +157,23 @@ namespace ATM.Test.Unit
             _separationPrinter.DidNotReceive().Print(planes);
         }
 
+        [TestCase(1500, 1800, 2500, 7499, 2300, 2300)]
+        [TestCase(1500, 1800, 2300, 2300, 2500, 7499)]
+        [TestCase(1499, 1800, 2500, 7499, 2300, 2300)]
+        [TestCase(1499, 1800, 2300, 2300, 2500, 7499)]
         [Test]
-        public void WarningCheck_BorderOnAltitudeLimit_AltitudeOkayDistanceNot()
+        public void WarningCheck_AltitudeOkayDistanceNotOkay_NoPrintCall(
+            int altitude1, int altitude2,
+            int latitude1, int latitude2,
+            int longitude1, int longitude2)
         {
             //Arrange
-            _plane1._altitude = 2000;
-            _plane1._latitude = 2300;
-            _plane1._longitude = 2500;
-            _plane2._altitude = 2300;
-            _plane2._latitude = 2300;
-            _plane2._longitude = 3500;
+            _plane1._altitude = altitude1;
+            _plane1._latitude = latitude1;
+            _plane1._longitude = longitude1;
+            _plane2._altitude = altitude2;
+            _plane2._latitude = latitude2;
+            _plane2._longitude = longitude2;
             List<Plane> planes = new List<Plane>()
             {
                 _plane1,
@@ -164,16 +185,27 @@ namespace ATM.Test.Unit
             _separationPrinter.DidNotReceive().Print(planes);
         }
 
+        [TestCase(1500, 1799, 2500, 7500, 2300, 2300)]
+        [TestCase(1500, 1799, 2300, 2300, 2500, 7500)]
+        [TestCase(500, 500, 2500, 7500, 2300, 2300)]
+        [TestCase(500, 500, 2300, 2300, 2500, 7500)]
+        [TestCase(1500, 1799, 2500, 7501, 2300, 2300)]
+        [TestCase(1500, 1799, 2300, 2300, 2500, 7501)]
+        [TestCase(500, 500, 2500, 7501, 2300, 2300)]
+        [TestCase(500, 500, 2300, 2300, 2500, 7501)]
         [Test]
-        public void WarningCheck_AltitudeNotOkayDistanceOkay()
+        public void WarningCheck_AltitudeNotOkayDistanceOkay_NoPrintCall(
+            int altitude1, int altitude2,
+            int latitude1, int latitude2,
+            int longitude1, int longitude2)
         {
             //Arrange
-            _plane1._altitude = 1000;
-            _plane1._latitude = 1000;
-            _plane1._longitude = 1000;
-            _plane2._altitude = 1299;
-            _plane2._latitude = 3500;
-            _plane2._longitude = 3500;
+            _plane1._altitude = altitude1;
+            _plane1._latitude = latitude1;
+            _plane1._longitude = longitude1;
+            _plane2._altitude = altitude2;
+            _plane2._latitude = latitude2;
+            _plane2._longitude = longitude2;
             List<Plane> planes = new List<Plane>()
             {
                 _plane1,
@@ -185,58 +217,27 @@ namespace ATM.Test.Unit
             _separationPrinter.DidNotReceive().Print(planes);
         }
 
+        [TestCase(1500, 1799, 2500, 7499, 2300, 2300)]
+        [TestCase(1500, 1799, 2300, 2300, 2500, 7499)]
+        [TestCase(500, 500, 2500, 7499, 2300, 2300)]
+        [TestCase(500, 500, 2300, 2300, 2500, 7499)]
+        [TestCase(1500, 1799, 2500, 2500, 2300, 2300)]
+        [TestCase(1500, 1799, 2300, 2300, 2500, 2500)]
+        [TestCase(500, 500, 2500, 2500, 2300, 2300)]
+        [TestCase(500, 500, 2300, 2300, 2500, 2500)]
         [Test]
-        public void WarningCheck_BorderOnDistanceLimit_AltitudeNotOkayDistanceOkay()
+        public void WarningCheck_AltitudeAndDistanceNotOkay_PrintCalled(
+            int altitude1, int altitude2,
+            int latitude1, int latitude2,
+            int longitude1, int longitude2)
         {
             //Arrange
-            _plane1._altitude = 2000;
-            _plane1._latitude = 2300;
-            _plane1._longitude = 2500;
-            _plane2._altitude = 2250;
-            _plane2._latitude = 2300;
-            _plane2._longitude = 7500;
-            List<Plane> planes = new List<Plane>()
-            {
-                _plane1,
-                _plane2
-            };
-            //Act
-            _uut.WarningCheck(planes);
-            //Assert
-            _separationPrinter.DidNotReceive().Print(planes);
-        }
-
-        [Test]
-        public void WarningCheck_BorderOnDistanceAndAltitudeLimit_AltitudeAndDistanceOkay()
-        {
-            //Arrange
-            _plane1._altitude = 2000;
-            _plane1._latitude = 2300;
-            _plane1._longitude = 2500;
-            _plane2._altitude = 2300;
-            _plane2._latitude = 2300;
-            _plane2._longitude = 7500;
-            List<Plane> planes = new List<Plane>()
-            {
-                _plane1,
-                _plane2
-            };
-            //Act
-            _uut.WarningCheck(planes);
-            //Assert
-            _separationPrinter.DidNotReceive().Print(planes);
-        }
-
-        [Test]
-        public void WarningCheck_AltitudeAndDistanceNotOkay()
-        {
-            //Arrange
-            _plane1._altitude = 2000;
-            _plane1._latitude = 2300;
-            _plane1._longitude = 2500;
-            _plane2._altitude = 2299;
-            _plane2._latitude = 2300;
-            _plane2._longitude = 2000;
+            _plane1._altitude = altitude1;
+            _plane1._latitude = latitude1;
+            _plane1._longitude = longitude1;
+            _plane2._altitude = altitude2;
+            _plane2._latitude = latitude2;
+            _plane2._longitude = longitude2;
             List<Plane> planes = new List<Plane>()
             {
                 _plane1,
@@ -248,62 +249,28 @@ namespace ATM.Test.Unit
             _separationPrinter.Received(1).Print(Arg.Any<List<Plane>>());
         }
 
+        [TestCase(1500, 1799, 1800, 2500, 7499, 7499, 2300, 2300, 2300)]
+        [TestCase(1500, 1799, 1801, 2500, 7499, 7499, 2300, 2300, 2300)]
+        [TestCase(1500, 1799, 1800, 2300, 2300, 2300, 2500, 7499, 7499)]
+        [TestCase(1500, 1799, 1801, 2300, 2300, 2300, 2500, 7499, 7499)]
+        [TestCase(1500, 1799, 1800, 2300, 2300, 2300, 2500, 2500, 2500)]
+        [TestCase(1500, 1799, 1801, 2300, 2300, 2300, 2500, 2500, 2500)]
         [Test]
-        public void WarningCheck_BorderOnDistanceAndAltitudeLimit_AltitudeNotOkayDistanceNotOkay()
+        public void WarningCheck_ThreePlanesDistanceAndAltitudeNotOkayThirdAltitudeOkay_PrintCalledOnce(
+            int altitude1, int altitude2, int altitude3,
+            int latitude1, int latitude2, int latitude3,
+            int longitude1, int longitude2, int longitude3)
         {
             //Arrange
-            _plane1._altitude = 1000;
-            _plane1._latitude = 1000;
-            _plane1._longitude = 1000;
-            _plane2._altitude = 1299;
-            _plane2._latitude = 3500;
-            _plane2._longitude = 3499;
-            List<Plane> planes = new List<Plane>()
-            {
-                _plane1,
-                _plane2
-            };
-            //Act
-            _uut.WarningCheck(planes);
-            //Assert
-            _separationPrinter.Received(1).Print(Arg.Any<List<Plane>>());
-        }
-
-        [Test]
-        public void Update_PlanesTooClose_SeparationPrinterCalled()
-        {
-            //Arrange
-            _plane1._altitude = 1000;
-            _plane1._latitude = 1000;
-            _plane1._longitude = 1000;
-            _plane2._altitude = 1299;
-            _plane2._latitude = 3500;
-            _plane2._longitude = 3500;
-            List<Plane> planes = new List<Plane>()
-            {
-                _plane1,
-                _plane2
-            };
-            //Act
-            _uut.Update(planes);
-            //Assert
-            _separationPrinter.DidNotReceive().Print(planes);
-
-        }
-
-        [Test]
-        public void WarningCheck_ThirdPlaneWithDifferentAltitude()
-        {
-            //Arrange
-            _plane1._altitude = 1000;
-            _plane1._latitude = 1000;
-            _plane1._longitude = 1000;
-            _plane2._altitude = 1000;
-            _plane2._latitude = 5000;
-            _plane2._longitude = 5000;
-            _plane3._altitude = 1500;
-            _plane3._latitude = 1000;
-            _plane3._longitude = 1000;
+            _plane1._altitude = altitude1;
+            _plane1._latitude = latitude1;
+            _plane1._longitude = longitude1;
+            _plane2._altitude = altitude2;
+            _plane2._latitude = latitude2;
+            _plane2._longitude = longitude2;
+            _plane3._altitude = altitude3;
+            _plane3._latitude = latitude3;
+            _plane3._longitude = longitude3;
             List<Plane> planes = new List<Plane>()
             {
                 _plane1,
@@ -313,73 +280,30 @@ namespace ATM.Test.Unit
             //Act
             _uut.Update(planes);
             //Assert
-            _separationPrinter.DidNotReceive().Print(planes);
+            // Print is called 2 times, Plane1 & Plane2 warning and Plane2 and Plane3 warning
+            _separationPrinter.ReceivedWithAnyArgs(2).Print(default);
         }
 
-        [Test]
-        public void WarningCheck_AllPlanesBorderOnAltitude_AllPlanesDifferentAltitude()
-        {
-            //Arrange
-            _plane1._altitude = 1000;
-            _plane1._latitude = 1000;
-            _plane1._longitude = 1000;
-            _plane2._altitude = 1300;
-            _plane2._latitude = 1000;
-            _plane2._longitude = 1000;
-            _plane3._altitude = 1600;
-            _plane3._latitude = 1000;
-            _plane3._longitude = 1000;
-            List<Plane> planes = new List<Plane>()
-            {
-                _plane1,
-                _plane2,
-                _plane3
-            };
-            //Act
-            _uut.Update(planes);
-            //Assert
-            _separationPrinter.DidNotReceive().Print(planes);
-        }
-
-        [Test]
-        public void WarningCheck_AllPlanesBorderOnDistance_AllPlanesSameAltitude()
-        {
-            //Arrange
-            _plane1._altitude = 1000;
-            _plane1._latitude = 1000;
-            _plane1._longitude = 6000;
-            _plane2._altitude = 1000;
-            _plane2._latitude = 1000;
-            _plane2._longitude = 1000;
-            _plane3._altitude = 1000;
-            _plane3._latitude = 1000;
-            _plane3._longitude = 11000;
-            List<Plane> planes = new List<Plane>()
-            {
-                _plane1,
-                _plane2,
-                _plane3
-            };
-            //Act
-            _uut.Update(planes);
-            //Assert
-            _separationPrinter.DidNotReceive().Print(planes);
-        }
-
+        [TestCase(1000, 701, 1299, 2500, 7499, 7499, 2300, 2300, 2300)]
+        [TestCase(1000, 701, 1299, 2300, 2300, 2300, 2500, 7499, 7499)]
+        [TestCase(1000, 701, 1299, 2500, 2500, 2500, 2300, 2300, 2300)]
         [Test]
         // BVA
-        public void WarningCheck_FirstPlaneWithTwoWarnings()
+        public void WarningCheck_FirstPlaneWithTwoWarnings(
+            int altitude1, int altitude2, int altitude3,
+            int latitude1, int latitude2, int latitude3,
+            int longitude1, int longitude2, int longitude3)
         {
             //Arrange
-            _plane1._altitude = 2000;
-            _plane1._latitude = 2000;
-            _plane1._longitude = 2000;
-            _plane2._altitude = 2299;
-            _plane2._latitude = 1499;
-            _plane2._longitude = 1499;
-            _plane3._altitude = 1701;
-            _plane3._latitude = 2499;
-            _plane3._longitude = 2499;
+            _plane1._altitude = altitude1;
+            _plane1._latitude = latitude1;
+            _plane1._longitude = longitude1;
+            _plane2._altitude = altitude2;
+            _plane2._latitude = latitude2;
+            _plane2._longitude = longitude2;
+            _plane3._altitude = altitude3;
+            _plane3._latitude = latitude3;
+            _plane3._longitude = longitude3;
             List<Plane> planes = new List<Plane>()
             {
                 _plane1, 

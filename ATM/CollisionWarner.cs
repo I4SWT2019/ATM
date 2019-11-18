@@ -52,9 +52,10 @@ namespace ATM
                         distance = Math.Sqrt(deltaX + deltaY);
 
                         // Go to next index i if distance is acceptable
-                        // AND index i's and j+1's altitude is different
+                        // AND index i's and j+1's altitude is <= 300 or >= 300
                         if ((planes.Count < j + 1) && 
-                            (distance >= 5000) && planes[j + 1]._altitude != planes[i]._altitude)
+                            (distance >= 5000) && 
+                            ((Math.Abs(planes[j + 1]._altitude-planes[i]._altitude) >= 300 )))
                             break;
                         else
                         {
